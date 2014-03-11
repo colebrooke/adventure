@@ -40,9 +40,9 @@ def db_rows(sqlstring):
 #---------------------------------------------------------
 
 
-def print_current_room(current_room):
+def print_current_room(userid):
 #---------------------------------------------------------
-
+	current_room = get_current_room ( userid )
 	print ("")
 	print ( db("select roomname from rooms where roomid=%s" % current_room ))
 	print ("")
@@ -58,15 +58,26 @@ def print_current_room(current_room):
 
 def move( room, direction, userid ):
 	illegal = 0
-	current_room = db("select to_id from route where from_id=%s and direction='%s'" % ( room, direction ))
+	next_room = db("select to_id from route where from_id=%s and direction='%s'" % ( room, direction ))
+	print ("next room : %s " % next_room )
+	time.sleep(3)	
+	current_room = next_room
+
 	if (current_room == "None"):
 		current_room = room
 		illegal = 1
 		print("You can't move in that direction!")
-	else
+	else:
+		# add one to the user moves 
 		db("update user set moves = moves + 1 where userid = %s" % ( userid ))
-		db("update user set location = current_room where userid = %s" % ( userid ))
+		# set the users current location in the db
+		db("update user set location = %s where userid = %s" % ( current_room, userid ))
 	return (current_room,illegal)
+
+
+def get_current_room( userid ):
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	return current_room
 
 print ("-------------------------------------------------")
 print ("  Welcome to Justin & Jensens NEW Adventure game ")
@@ -84,7 +95,7 @@ time.sleep(0.5)
 
 
 # Set up various game variables not in db???
-current_room = 1
+current_room = get_current_room ( userid )
 illegal_move = 0
 # This is the main loop of the game...
 
@@ -93,7 +104,7 @@ while loop == 1 :
 	print ("")
 	print ("illegal move = %s" % (illegal_move))
 	if (illegal_move == 0):	
-		print ("----current_room=%s" % (current_room))
+		print ("----current_room=%s" % (get_current_room (userid)))
 	if (illegal_move == 1):
 		print ("-----You can't move in that direction!")
 	
@@ -109,9 +120,9 @@ while loop == 1 :
 
 
 	# Version1 direction interpretation	
-	if (userinput == "n") or (userinput == "north"): direction = "n"; current_room, illegal_move=move ( current_room, direction, userid )
+	if (userinput == "n") or (userinput == "north"): direction = "n"; move ( current_room, direction, userid )
 	elif (userinput == "e") or (userinput == "east"): direction = "e"; current_room, illegal_move=move ( current_room, direction, userid )
-	elif (userinput == "s") or (userinput == "south"): direction = "s"; current_room, illegal_move, illegal_move=move ( current_room, direction, userid )
+	elif (userinput == "s") or (userinput == "south"): direction = "s"; move ( current_room, direction, userid )
 	elif (userinput == "w") or (userinput == "west"): direction = "w"; current_room, illegal_move=move ( current_room, direction, userid )
 	elif (userinput == "u") or (userinput == "up"): direction = "u"; current_room, illegal_move=move ( current_room, direction, userid )
 	elif (userinput == "d") or (userinput == "down"): direction = "d"; current_room, illegal_move=move ( current_room, direction, userid )
