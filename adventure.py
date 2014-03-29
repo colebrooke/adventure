@@ -13,15 +13,15 @@ import re # for regex string matching
 os.system('cls')
 os.system('clear')
 
+
+conection = sqlitedb.connect('game.db')
+
 def p(debugstring):
 	if (debug == 1):
 		print ("%s" % debugstring)
 
-
-
-conection = sqlitedb.connect('game.db')
 #conection.text_factory = str
-# this function sets up the datebase connection.
+
 def db(sqlstring):
 #---------------------------------------------------------
 	with conection:
@@ -31,6 +31,7 @@ def db(sqlstring):
 		return ("%s" % (row))
 		cursor.close()
 #---------------------------------------------------------
+
 
 def db_print_rows(sqlstring):
 #---------------------------------------------------------
@@ -44,6 +45,7 @@ def db_print_rows(sqlstring):
 		cursor.close()
 #---------------------------------------------------------
 
+
 def db_return_rows(sqlstring):
 #---------------------------------------------------------
 	with conection:
@@ -55,30 +57,41 @@ def db_return_rows(sqlstring):
 #---------------------------------------------------------
 
 
+def scroll(lines):
+#----------------------------------------------------------------------
+	for x in range (0, lines):
+		print ("")
+		time.sleep(0.1)
+#----------------------------------------------------------------------
+
 
 def print_current_room(userid):
 #---------------------------------------------------------
-	print ("userid in print_current_room is %s" % (userid))
 	current_room = db("select location from user where userid=%s" % ( userid ))
-	print ("current location for this user is %s" % (current_room))
+	#print ("current location for this user is %s" % (current_room))
 	#current_room = get_current_room ( userid )
 	print ("")
 	print ("*********************************************************************")
 	print ("")
 	print ( db("select roomname from rooms where roomid=%s" % current_room ))
 	print ("")
+	time.sleep(0.3)
 	print ( db("select roomdesc from rooms where roomid=%s" % current_room ))
 	print ("")
+	time.sleep(0.3)
 	db_print_rows("select route_desc from route where from_id=%s" % current_room )
 	#for row in result:
 	#	print ("%s" % row )
 	#print (" >> ", end="")
+	time.sleep(0.3)
 	db_print_rows("select objectdesc_short from object where roomid=%s" % current_room )
 	print ("")
 	#print (" >>> ", end="")
+	time.sleep(0.3)
 	db_print_rows("select itemdesc_short from item where currentroom=%s" % current_room )
-
+	time.sleep(0.3)
 #---------------------------------------------------------
+
 
 def move( direction, userid ):
 #---------------------------------------------------------
@@ -102,18 +115,18 @@ def move( direction, userid ):
 		# set the users current location in the db
 		db("update user set location = %s where userid = %s" % ( next_room, userid ))
 		# print the room description for the user
+		scroll (5)
 		print_current_room( userid )
 
 #	return (current_room,illegal)
 #--------------------------------------------------------
 
 
-
 def get_current_room( userid ):
+#----------------------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
 	return current_room
-
-
+#----------------------------------------------------------------------
 
 
 def examine ():
@@ -123,7 +136,11 @@ def examine ():
 	available_objects = db_return_rows("select objectdesc_short from object where roomid=%s" % current_room )
 
 	# strip the action term from the user input to leave the item your examining.
-	thing_to_examine = userinput.replace('examine ', '')
+	if re.match (r'look at', userinput ):
+		thing_to_examine = userinput.replace('look at ', '')
+	else:
+		thing_to_examine = userinput.replace('examine ', '')
+
 
 	# First need to convert each tuple in the list to a list within a list:
 	item_list = [list(i) for i in available_items ] 
@@ -149,18 +166,60 @@ def examine ():
 #---------------------------------------------------------
 
 
+def take ():
+#---------------------------------------------------------
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	available_items = db_return_rows("select itemname from item where currentroom=%s" % current_room )
+
+	inventory = db_return_rows("select itemname from user as U join \
+				inventory as I on U.userid=I.userid join \
+				item as D on I.itemid=D.itemid \
+				where I.userid=%s" % (userid))
+	# For the inventory...
+	# First need to convert each tuple in the list to a list within a list:
+	inventory_list = [list(i) for i in inventory ] 
+	
+	# Now need to convert each list within the list to a normal string...
+	for i, item_name in enumerate(inventory_list):
+		inventory_list[i] = item_name[0]
+
+	# For the items in the room...
+	# First need to convert each tuple in the list to a list within a list:
+	item_list = [list(i) for i in available_items ] 
+	
+	# Now need to convert each list within the list to a normal string...
+	for i, item_name in enumerate(item_list):
+		item_list[i] = item_name[0]
+
+	# So that the list can be searched with the 'in' command...
+
+
+
+
+	# strip the action term from the user input to leave the item you want to take.
+	if re.match (r'take', userinput ):
+		thing_to_take = userinput.replace('take ', '')
+	elif re.match (r'pick up', userinput ):
+		thing_to_take = userinput.replace('pick up ', '')
+	elif re.match (r'get', userinput ):
+		thing_to_take = userinput.replace('get ', '')
+	if re.match (r'the', thing_to_take ):
+		thing_to_take = thing_to_take.replace('the ', '')
+
+	if thing_to_take in item_list:
+		if thing_to_take in inventory_list:
+			print ("The %s looks similar to one you already have." % thing_to_take )
+			print ("You decide to leave it for another adventurer to find.")
+		else:
+			print ("Yes you can take the %s" % thing_to_take )
+	else:
+		print ("You can't do that!")
+
+#--------------------------------------------------------
+
+
 def look ():
 	print_current_room( userid )
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -189,20 +248,12 @@ print_current_room( userid )
 loop = 1
 while loop == 1 :
 	print ("")
-	#print ("illegal move = %s" % (illegal_move))
-	#if (illegal_move == 0):	
-	#print ("----current_room=%s" % (get_current_room (userid)))
-	#if (illegal_move == 1):
-	#print ("-----You can't move in that direction!")
-	
-	#print (db("select roomdesc from rooms where roomid=%s" % current_room ))
-	#if (illegal_move == 0):	
 	moves = db("select moves from user where userid=%s" % userid )
 	p ("DEBUG: your userid %s and your total moves are %s" % (userid, moves))
 
 
 	
-	userinput=input('Which direction do you want to go? ').lower()
+	userinput=input('What do you want to do? ').lower()
 
 
 	# Version1 direction interpretation	
@@ -216,16 +267,23 @@ while loop == 1 :
 
 	# Inventory
 	elif (userinput == "i") or (userinput == "inventory"): 
-		db_print_rows("select itemname from user as U join inventory as I on U.userid=I.userid join item as D on I.itemid=D.itemid where I.userid=%s" % (userid))
-	
+		db_print_rows("select itemname from user as U join \
+				inventory as I on U.userid=I.userid join \
+				item as D on I.itemid=D.itemid \
+				where I.userid=%s" % (userid))
+	# Take / Pick up
+	elif re.match ( r'^take', userinput ) or \
+		re.match ( r'^pick up', userinput ) or \
+		re.match ( r'^get', userinput ): take ()		
+
+
 	# Examine
-	elif re.match ( r'^examine', userinput ):
-		#print ("You examine that but don't notice anything special.")
-		examine ()
+	elif re.match ( r'^examine', userinput ) or re.match ( r'^look at', userinput ): examine ()
 
 	# Look
 	elif (userinput == "look"): look ()	
 
+	# Fall through
 	else :
 		print ("I don't understand that input. Try again!")
 	
