@@ -57,6 +57,32 @@ def db_return_rows(sqlstring):
 #---------------------------------------------------------
 
 
+def db_query(sqlstring):
+#---------------------------------------------------------
+	with conection:
+		cursor = conection.cursor()
+		cursor.execute("%s" % sqlstring)
+		rows = cursor.fetchall()
+		#return rows
+		cursor.close()
+
+	# First need to convert each tuple in the list to a list within a list:
+	row_list = [list(row) for row in rows ] 
+	
+	#This gets the length of the list of items:
+	#print ("number of items: %s" % len(item_list) )
+
+	# Now need to convert each list within the list to a normal string...
+	for i, row_text in enumerate(row_list):
+		row_list[i] = row_text[0]
+
+	return row_list
+
+
+
+#---------------------------------------------------------
+
+
 def scroll(lines):
 #----------------------------------------------------------------------
 	for x in range (0, lines):
@@ -132,8 +158,8 @@ def get_current_room( userid ):
 def examine ():
 #---------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
-	available_items = db_return_rows("select itemname from item where currentroom=%s" % current_room )
-	available_objects = db_return_rows("select objectdesc_short from object where roomid=%s" % current_room )
+	available_items = db_query("select itemname from item where currentroom=%s" % current_room )
+	available_objects = db_query("select objectname from object where roomid=%s" % current_room )
 
 	# strip the action term from the user input to leave the item your examining.
 	if re.match (r'look at', userinput ):
@@ -142,18 +168,18 @@ def examine ():
 		thing_to_examine = userinput.replace('examine ', '')
 
 
-	# First need to convert each tuple in the list to a list within a list:
-	item_list = [list(i) for i in available_items ] 
-	
-	#This gets the length of the list of items:
-	#print ("number of items: %s" % len(item_list) )
-
-	# Now need to convert each list within the list to a normal string...
-	for i, item_name in enumerate(item_list):
-		item_list[i] = item_name[0]
+#	# First need to convert each tuple in the list to a list within a list:
+#	item_list = [list(i) for i in available_items ] 
+#	
+#	#This gets the length of the list of items:
+#	#print ("number of items: %s" % len(item_list) )
+#
+#	# Now need to convert each list within the list to a normal string...
+#	for i, item_name in enumerate(item_list):
+#		item_list[i] = item_name[0]
 
 	# So that the list can be searched with the 'in' command...
-	if thing_to_examine in item_list:
+	if thing_to_examine in available_items:
 		print ("")
 		print ("You examine the %s..." % thing_to_examine ) 
 		time.sleep(1.3)
@@ -161,8 +187,18 @@ def examine ():
 		db_print_rows("select itemdesc from item where itemname='%s'" % thing_to_examine)
 		print ("")
 		time.sleep(0.8)
+	elif thing_to_examine in available_objects:
+		print ("")
+		print ("You examine the %s..." % thing_to_examine )
+		time.sleep(1.3)
+		print ("")
+		db_print_rows("select objectdesc from object where objectname='%s'" % thing_to_examine)
 	else:
 		print ("You can't do that.")
+
+	
+
+
 #---------------------------------------------------------
 
 
@@ -219,20 +255,49 @@ def take ():
 
 
 def look ():
+#----------------------------------------------------------------------
 	print_current_room( userid )
+#----------------------------------------------------------------------
 
+#======================================================================
 
 
 print ("-------------------------------------------------")
 print ("  Welcome to Justin & Jensens NEW Adventure game ")
 print ("-------------------------------------------------")
-print ("")
+print ("""
+   1  Log in an exsiting adventurer
+   2  Create a new adventurer
+   3  See who is online
+   4  Exit
+""")
+while True: 
+	selection=input("Please Select an option: ") 
+	if selection =='1': 
+		#userid=input("Enter your user ID: ")
+		username=input("Enter your username: ")
+		userid = db("select userid from user where name='%s' collate nocase" % username)
+		if userid != 'None':
+			break
+		elif userid == 'None':
+			print("Not a valid username.  Returning to menu.")
+	elif selection == '2': 
+		print ("Create a new adventurer, feature not available yet!")
+	elif selection == '3':
+		print ("Feature not available yet!")
+	elif selection == '4': 
+		break
+	else: 
+		print ("Unknown Option Selected!")
 
-userid=input("Enter your user ID: ")
 
-username = db("select name from user where userid=%s" % userid)
 
-print ("Your username is -- %s" % db("select name from user where userid=%s" % userid))
+
+#username = db("select name from user where userid=%s" % userid)
+
+#print ("Your username is -- %s" % db("select name from user where userid=%s" % userid))
+print (" Your userid is -- %s" % userid)
+
 
 
 time.sleep(0.5)
