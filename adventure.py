@@ -253,6 +253,27 @@ def take ():
 
 #--------------------------------------------------------
 
+def help ():
+	print ( """
+
+	You can enter a directiom in the form of:-
+		
+	N for North
+	E for East 
+	S for South
+	W for West
+	U for Up
+	D for Down
+		
+	Other commands include:-
+		
+	Look around, look at, examine, where am I, take, drop, activate, use, 
+	get, restart, score, quit, sleep, talk to, speak to, hit, kill,
+	attack, save, load.
+
+	""")
+
+
 
 def look ():
 #----------------------------------------------------------------------
@@ -286,7 +307,8 @@ while True:
 	elif selection == '3':
 		print ("Feature not available yet!")
 	elif selection == '4': 
-		break
+		print ("Thanks for playing!")
+		sys.exit()
 	else: 
 		print ("Unknown Option Selected!")
 
@@ -296,7 +318,7 @@ while True:
 #username = db("select name from user where userid=%s" % userid)
 
 #print ("Your username is -- %s" % db("select name from user where userid=%s" % userid))
-print (" Your userid is -- %s" % userid)
+#print (" Your userid is -- %s" % userid)
 
 
 
@@ -348,6 +370,18 @@ while loop == 1 :
 	# Look
 	elif (userinput == "look"): look ()	
 
+	# Help
+	elif (userinput == "help"):
+		help ()
+
+	# Exit
+	elif (userinput == "exit"):
+		print ("Thanks for playing!")
+		sys.exit()
+
+
+	# end of user input interpretation
+	#-----------------------------------------------------------------------------------------
 	# Fall through
 	else :
 		print ("I don't understand that input. Try again!")
