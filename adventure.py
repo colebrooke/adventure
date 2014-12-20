@@ -99,21 +99,34 @@ def print_current_room(userid):
 	print ("")
 	print ("*********************************************************************")
 	print ("")
+
+	# print room name...
 	print ( db("select roomname from rooms where roomid=%s" % current_room ))
 	print ("")
 	time.sleep(0.3)
+
+	# print room description...
 	print ( db("select roomdesc from rooms where roomid=%s" % current_room ))
 	print ("")
 	time.sleep(0.3)
+
+	# print available routes to other rooms...
 	db_print_rows("select route_desc from route where from_id=%s" % current_room )
-	#for row in result:
-	#	print ("%s" % row )
-	#print (" >> ", end="")
 	time.sleep(0.3)
+	print ("")
+
+	# print any NPCs that may be in the room...
+	db_print_rows("select npcshortdesc from npc where npcroom=%s" % current_room )
+	print ("")
+	time.sleep(0.3)
+
+	# print any objects in the room
 	db_print_rows("select objectdesc_short from object where roomid=%s" % current_room )
 	print ("")
 	#print (" >>> ", end="")
 	time.sleep(0.3)
+
+	# print any items in the room
 	db_print_rows("select itemdesc_short from item where currentroom=%s" % current_room )
 	time.sleep(0.3)
 #---------------------------------------------------------
@@ -160,6 +173,7 @@ def examine ():
 	current_room = db("select location from user where userid=%s" % ( userid ))
 	available_items = db_query("select itemname from item where currentroom=%s" % current_room )
 	available_objects = db_query("select objectname from object where roomid=%s" % current_room )
+	available_npcs = db_query("select npcname from npc where npcroom =%s" % current_room )
 
 	# strip the action term from the user input to leave the item your examining.
 	if re.match (r'look at', userinput ):
@@ -167,6 +181,7 @@ def examine ():
 	else:
 		thing_to_examine = userinput.replace('examine ', '')
 
+	print ("thing_to_examine is %s" % thing_to_examine )
 
 #	# First need to convert each tuple in the list to a list within a list:
 #	item_list = [list(i) for i in available_items ] 
@@ -193,6 +208,13 @@ def examine ():
 		time.sleep(1.3)
 		print ("")
 		db_print_rows("select objectdesc from object where objectname='%s'" % thing_to_examine)
+	elif thing_to_examine in available_npcs:
+		print ("")
+		print ("You examine the %s..." % thing_to_examine )
+		time.sleep(1.3)
+		print ("")
+		db_print_rows("select npcdesc from npc where npcname='%s'" % thing_to_examine)
+	
 	else:
 		print ("You can't do that.")
 
