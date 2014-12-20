@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-debug = 0 
+debug = 1
 
 import sqlite3 as sqlitedb
 import sys
@@ -42,6 +42,22 @@ def db_print_rows(sqlstring):
 		#return ("%s" % (rows))
 		for row in cursor:
 			print ("%s" % (row))
+		cursor.close()
+#---------------------------------------------------------
+
+def db_print_rows_numbered(sqlstring):
+#---------------------------------------------------------
+	with conection:
+		cursor = conection.cursor()
+		cursor.execute("%s" % sqlstring)
+		#rows = cursor.fetchall()
+		#return ("%s" % (rows))
+		a = 1
+		for row in cursor:
+			print ("%s:" % (a))
+			a = a + 1
+			print ("%s" % (row))
+			print ("")
 		cursor.close()
 #---------------------------------------------------------
 
@@ -171,9 +187,9 @@ def get_current_room( userid ):
 def examine ():
 #---------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
-	available_items = db_query("select itemname from item where currentroom=%s" % current_room )
-	available_objects = db_query("select objectname from object where roomid=%s" % current_room )
-	available_npcs = db_query("select npcname from npc where npcroom =%s" % current_room )
+	available_items = db_query("select lower(itemname) from item where currentroom=%s" % current_room )
+	available_objects = db_query("select lower(objectname) from object where roomid=%s" % current_room )
+	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
 
 	# strip the action term from the user input to leave the item your examining.
 	if re.match (r'look at', userinput ):
@@ -181,7 +197,7 @@ def examine ():
 	else:
 		thing_to_examine = userinput.replace('examine ', '')
 
-	print ("thing_to_examine is %s" % thing_to_examine )
+#	print ("thing_to_examine is %s" % thing_to_examine )
 
 #	# First need to convert each tuple in the list to a list within a list:
 #	item_list = [list(i) for i in available_items ] 
@@ -199,7 +215,7 @@ def examine ():
 		print ("You examine the %s..." % thing_to_examine ) 
 		time.sleep(1.3)
 		print ("")
-		db_print_rows("select itemdesc from item where itemname='%s'" % thing_to_examine)
+		db_print_rows("select itemdesc from item where lower(itemname)='%s'" % thing_to_examine)
 		print ("")
 		time.sleep(0.8)
 	elif thing_to_examine in available_objects:
@@ -207,13 +223,13 @@ def examine ():
 		print ("You examine the %s..." % thing_to_examine )
 		time.sleep(1.3)
 		print ("")
-		db_print_rows("select objectdesc from object where objectname='%s'" % thing_to_examine)
+		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
 	elif thing_to_examine in available_npcs:
 		print ("")
 		print ("You examine the %s..." % thing_to_examine )
 		time.sleep(1.3)
 		print ("")
-		db_print_rows("select npcdesc from npc where npcname='%s'" % thing_to_examine)
+		db_print_rows("select npclongdesc from npc where lower(npcname)='%s'" % thing_to_examine)
 	
 	else:
 		print ("You can't do that.")
@@ -294,6 +310,35 @@ def help ():
 	attack, save, load.
 
 	""")
+
+#-------------------------------------------------------
+
+def talk ():
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
+
+#	print ("available_npcs: %s" % available_npcs )
+
+	# strip the action term from the user input to leave the npc you're talking to...
+	if re.match (r'talk to', userinput ):
+		npc_to_talk_to = userinput.replace('talk to ', '')
+	else:
+		npc_to_talk_to = userinput.replace('speak to ', '')
+
+	if npc_to_talk_to in available_npcs:
+		print ("")
+		print ("What do you want to say to the %s?" % npc_to_talk_to )
+		time.sleep(1.3)
+		print ("")
+		# set the npcid we are talking to...
+		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
+		# print the possible questions...
+		db_print_rows_numbered("select q_and_a_text from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
+	
+	else:
+		print ("You can't do that.")
+
+
 
 
 
@@ -392,12 +437,16 @@ while loop == 1 :
 	# Look
 	elif (userinput == "look"): look ()	
 
+	# Talk
+	elif re.match ( r'^talk to', userinput ) or \
+		re.match ( r'speak to', userinput ): talk ()
+
 	# Help
 	elif (userinput == "help"):
 		help ()
 
 	# Exit
-	elif (userinput == "exit"):
+	elif (userinput == "exit") or (userinput == "quit"):
 		print ("Thanks for playing!")
 		sys.exit()
 
