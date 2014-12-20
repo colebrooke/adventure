@@ -10,6 +10,7 @@ import fnmatch # this is for pattern matching files
 import re # for regex string matching
 
 
+
 os.system('cls')
 os.system('clear')
 
@@ -23,6 +24,8 @@ def p(debugstring):
 #conection.text_factory = str
 
 def db(sqlstring):
+	conection = sqlitedb.connect('game.db')
+
 #---------------------------------------------------------
 	with conection:
 		cursor = conection.cursor()
@@ -54,10 +57,12 @@ def db_print_rows_numbered(sqlstring):
 		#return ("%s" % (rows))
 		a = 1
 		for row in cursor:
-			print ("%s:" % (a))
-			a = a + 1
-			print ("%s" % (row))
-			print ("")
+			#print ("%s:" % (a))
+			#a = a + 1
+			#print ("%s" % (=row))
+			#output = row[0]
+			print ( "   ", row[0], " ", row[1])
+			#print (row[1])
 		cursor.close()
 #---------------------------------------------------------
 
@@ -93,8 +98,6 @@ def db_query(sqlstring):
 		row_list[i] = row_text[0]
 
 	return row_list
-
-
 
 #---------------------------------------------------------
 
@@ -147,6 +150,11 @@ def print_current_room(userid):
 	time.sleep(0.3)
 #---------------------------------------------------------
 
+def get_current_room( userid ):
+#----------------------------------------------------------------------
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	return current_room
+#----------------------------------------------------------------------
 
 def move( direction, userid ):
 #---------------------------------------------------------
@@ -177,11 +185,6 @@ def move( direction, userid ):
 #--------------------------------------------------------
 
 
-def get_current_room( userid ):
-#----------------------------------------------------------------------
-	current_room = db("select location from user where userid=%s" % ( userid ))
-	return current_room
-#----------------------------------------------------------------------
 
 
 def examine ():
@@ -333,7 +336,21 @@ def talk ():
 		# set the npcid we are talking to...
 		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
 		# print the possible questions...
-		db_print_rows_numbered("select q_and_a_text from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
+		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
+		print ("")
+		while True: 
+			selection=input("Please Select an option: ")
+			try:
+				selected_question = int(selection)
+			except ValueError:
+				print("You must choose a number corrisponding to the choice above.")
+			print ("You selected option %s" % selected_question )
+			break
+		answer = db("select q_and_a_link from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
+		print ("")
+		db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
+		print ("")
+
 	
 	else:
 		print ("You can't do that.")
@@ -375,6 +392,7 @@ while True:
 		print ("Feature not available yet!")
 	elif selection == '4': 
 		print ("Thanks for playing!")
+		print ("")
 		sys.exit()
 	else: 
 		print ("Unknown Option Selected!")
