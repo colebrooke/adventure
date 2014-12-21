@@ -1,0 +1,8 @@
+Author: Justin Miller / Jensen Miller
+
+This is a text based science fiction themed adventure game, written in Python 3.
+The database back end is created in SQLite3.
+
+We are currently devloping the game to run under Linux, it's not been tested in windows.
+
+
