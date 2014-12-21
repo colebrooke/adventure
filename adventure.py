@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-debug = 1
+debug = 0 
 
 import sqlite3 as sqlitedb
 import sys
@@ -344,7 +344,6 @@ def talk ():
 				selected_question = int(selection)
 			except ValueError:
 				print("You must choose a number corrisponding to the choice above.")
-			print ("You selected option %s" % selected_question )
 			break
 		answer = db("select q_and_a_link from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
 		print ("")
