@@ -36,7 +36,7 @@ def db(sqlstring):
 #---------------------------------------------------------
 
 
-def db_print_rows(sqlstring):
+def db_print_rows(sqlstring, colour='none'):
 #---------------------------------------------------------
 	with conection:
 		cursor = conection.cursor()
@@ -44,7 +44,13 @@ def db_print_rows(sqlstring):
 		#rows = cursor.fetchall()
 		#return ("%s" % (rows))
 		for row in cursor:
-			print ("%s" % (row))
+			if colour == 'none': print ("%s" % (row))
+			if colour == 'yellow': print ('\033[1;33m%s\033[1;m' % (row))
+			if colour == 'magenta': print ('\033[1;35m%s\033[1;m' % (row))
+			if colour == 'grey': print ('\033[1;30m%s\033[1;m' % (row))
+			if colour == 'bold': print ('\033[1;37m%s\033[1;m' % (row))
+
+			#print ('\033[1;33mYellow like Yolk\033[1;m')
 		cursor.close()
 #---------------------------------------------------------
 
@@ -120,12 +126,12 @@ def print_current_room(userid):
 	print ("")
 
 	# print room name...
-	print ( db("select roomname from rooms where roomid=%s" % current_room ))
+	db_print_rows("select roomname from rooms where roomid=%s" % current_room, 'bold')
 	print ("")
 	time.sleep(0.3)
 
 	# print room description...
-	print ( db("select roomdesc from rooms where roomid=%s" % current_room ))
+	db_print_rows("select roomdesc from rooms where roomid=%s" % current_room, 'grey' )
 	print ("")
 	time.sleep(0.3)
 
@@ -135,7 +141,7 @@ def print_current_room(userid):
 	print ("")
 
 	# print any NPCs that may be in the room...
-	db_print_rows("select npcshortdesc from npc where npcroom=%s" % current_room )
+	db_print_rows("select npcshortdesc from npc where npcroom=%s" % current_room, 'yellow' )
 	print ("")
 	time.sleep(0.3)
 
@@ -146,7 +152,8 @@ def print_current_room(userid):
 
 	# print any items in the room, if they are not in the users inventory...
 	db_print_rows(	"select itemdesc_short from item where currentroom = %s \
-			and itemid not in ( select distinct itemid from inventory where userid = %s )" % ( current_room, userid ))
+			and itemid not in ( select distinct itemid from inventory \
+			where userid = %s )" % ( current_room, userid ), 'magenta')
 	time.sleep(0.3)
 #---------------------------------------------------------
 
