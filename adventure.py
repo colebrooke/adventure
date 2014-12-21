@@ -242,6 +242,17 @@ def examine ():
 
 #---------------------------------------------------------
 
+def inventory ():
+#---------------------------------------------------------
+	print ("You have the following items in your inventory:-")
+	db_print_rows(	"select itemname from user as U join \
+			inventory as I on U.userid=I.userid join \
+			item as D on I.itemid=D.itemid \
+			where I.userid=%s" % (userid))
+
+#---------------------------------------------------------
+
+
 
 def take ():
 #---------------------------------------------------------
@@ -288,7 +299,9 @@ def take ():
 			print ("The %s looks similar to one you already have." % thing_to_take )
 			print ("You decide to leave it for another adventurer to find.")
 		else:
-			print ("Yes you can take the %s" % thing_to_take )
+			print ("You take the %s." % thing_to_take )
+			thing_to_take_id = db("select itemid from item where itemname = '%s'" % thing_to_take )
+			db("insert into inventory (userid, itemid) values ( '%s', '%s' )" % (userid, thing_to_take_id) )	
 	else:
 		print ("You can't do that!")
 
@@ -336,7 +349,8 @@ def talk ():
 		# set the npcid we are talking to...
 		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
 		# print the possible questions...
-		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
+		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a \
+					where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
 		print ("")
 		while True: 
 			selection=input("Please Select an option: ")
@@ -345,7 +359,8 @@ def talk ():
 			except ValueError:
 				print("You must choose a number corrisponding to the choice above.")
 			break
-		answer = db("select q_and_a_link from q_and_a where q_and_a_npcid='%s' and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
+		answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
+				and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
 		print ("")
 		db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
 		print ("")
@@ -437,11 +452,8 @@ while loop == 1 :
 	elif (userinput == "se") or (userinput == "south east"): direction = "se"; move ( direction, userid )
 
 	# Inventory
-	elif (userinput == "i") or (userinput == "inventory"): 
-		db_print_rows("select itemname from user as U join \
-				inventory as I on U.userid=I.userid join \
-				item as D on I.itemid=D.itemid \
-				where I.userid=%s" % (userid))
+	elif (userinput == "i") or (userinput == "inventory"): inventory ()
+
 	# Take / Pick up
 	elif re.match ( r'^take', userinput ) or \
 		re.match ( r'^pick up', userinput ) or \
