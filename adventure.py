@@ -140,13 +140,13 @@ def print_current_room(userid):
 	time.sleep(0.3)
 
 	# print any objects in the room
-	db_print_rows("select objectdesc_short from object where roomid=%s" % current_room )
-	print ("")
-	#print (" >>> ", end="")
-	time.sleep(0.3)
+	#db_print_rows("select objectdesc_short from object where roomid=%s" % current_room )
+	#print ("")
+	#time.sleep(0.3)
 
-	# print any items in the room
-	db_print_rows("select itemdesc_short from item where currentroom=%s" % current_room )
+	# print any items in the room, if they are not in the users inventory...
+	db_print_rows(	"select itemdesc_short from item where currentroom = %s \
+			and itemid not in ( select distinct itemid from inventory where userid = %s )" % ( current_room, userid ))
 	time.sleep(0.3)
 #---------------------------------------------------------
 
