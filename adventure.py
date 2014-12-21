@@ -200,19 +200,6 @@ def examine ():
 	else:
 		thing_to_examine = userinput.replace('examine ', '')
 
-#	print ("thing_to_examine is %s" % thing_to_examine )
-
-#	# First need to convert each tuple in the list to a list within a list:
-#	item_list = [list(i) for i in available_items ] 
-#	
-#	#This gets the length of the list of items:
-#	#print ("number of items: %s" % len(item_list) )
-#
-#	# Now need to convert each list within the list to a normal string...
-#	for i, item_name in enumerate(item_list):
-#		item_list[i] = item_name[0]
-
-	# So that the list can be searched with the 'in' command...
 	if thing_to_examine in available_items:
 		print ("")
 		print ("You examine the %s..." % thing_to_examine ) 
@@ -281,9 +268,6 @@ def take ():
 
 	# So that the list can be searched with the 'in' command...
 
-
-
-
 	# strip the action term from the user input to leave the item you want to take.
 	if re.match (r'take', userinput ):
 		thing_to_take = userinput.replace('take ', '')
@@ -307,7 +291,35 @@ def take ():
 
 #--------------------------------------------------------
 
+def drop ():
+#--------------------------------------------------------
+	inventory = db_query("select itemname from user as U join \
+				inventory as I on U.userid=I.userid join \
+				item as D on I.itemid=D.itemid \
+				where I.userid=%s" % (userid))
+	if re.match (r'drop', userinput ):
+		thing_to_drop = userinput.replace('drop ', '')
+	elif re.match (r'put down', userinput ):
+		thing_to_drop = userinput.replace('put down ', '')
+
+	
+
+	if thing_to_drop in inventory:
+		print ("You drop the %s." % thing_to_drop )
+		# find the id of the item...
+		thing_to_drop_id = db("select itemid from item where itemname = '%s'" % thing_to_drop )
+		# delete the item from our inventory...
+		db("delete from inventory where userid = %s and itemid = %s" % (userid, thing_to_drop_id) )
+		current_room = db("select location from user where userid=%s" % ( userid ))
+		db("update item set currentroom = %s where itemid = %s" % (current_room, thing_to_drop_id) )	
+
+	else:
+		print ("You can't do that!")
+
+
+
 def help ():
+#--------------------------------------------------------
 	print ( """
 
 	You can enter a directiom in the form of:-
@@ -330,10 +342,9 @@ def help ():
 #-------------------------------------------------------
 
 def talk ():
+#-------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
-
-#	print ("available_npcs: %s" % available_npcs )
 
 	# strip the action term from the user input to leave the npc you're talking to...
 	if re.match (r'talk to', userinput ):
@@ -365,10 +376,9 @@ def talk ():
 		db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
 		print ("")
 
-	
 	else:
 		print ("You can't do that.")
-
+#----------------------------------------------------------------------
 
 
 
@@ -459,6 +469,9 @@ while loop == 1 :
 		re.match ( r'^pick up', userinput ) or \
 		re.match ( r'^get', userinput ): take ()		
 
+	# Drop / Put down
+	elif re.match ( r'^drop', userinput ) or \
+		re.match ( r'^put down', userinput ): drop ()
 
 	# Examine
 	elif re.match ( r'^examine', userinput ) or re.match ( r'^look at', userinput ): examine ()
