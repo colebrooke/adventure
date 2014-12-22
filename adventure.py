@@ -49,8 +49,6 @@ def db_print_rows(sqlstring, colour='none'):
 			if colour == 'magenta': print ('\033[1;35m%s\033[1;m' % (row))
 			if colour == 'grey': print ('\033[1;30m%s\033[1;m' % (row))
 			if colour == 'bold': print ('\033[1;37m%s\033[1;m' % (row))
-
-			#print ('\033[1;33mYellow like Yolk\033[1;m')
 		cursor.close()
 #---------------------------------------------------------
 
@@ -418,7 +416,18 @@ while True:
 		elif userid == 'None':
 			print("Not a valid username.  Returning to menu.")
 	elif selection == '2': 
-		print ("Create a new adventurer, feature not available yet!")
+		username=input("Enter your firstname / login name: ")
+		checkuser = db("select name from user where name='%s' collate nocase" % username)
+		if checkuser == username:
+			print("There is already a user with that name!")
+		if username == '':
+			print("Not a valid username.  Returning to menu.")
+			break
+		else :
+			db("insert into user (name, score, location, health, userdesc, moves) \
+				values ( '%s', '0', '1', '100', '', '0' )" % username )
+			print("Created a new user.  You can now log in.")
+	
 	elif selection == '3':
 		print ("Feature not available yet!")
 	elif selection == '4': 
