@@ -464,8 +464,8 @@ while loop == 1 :
 	p ("DEBUG: your userid %s and your total moves are %s" % (userid, moves))
 
 
-	
-	userinput=input('What do you want to do? ').lower()
+	#print ('\033[1;37m%s\033[1;m'	
+	userinput=input('\033[0;37mWhat do you want to do? \033[0;m').lower()
 
 
 	# Version1 direction interpretation	
