@@ -151,7 +151,7 @@ def print_current_room(userid):
 	# print any items in the room, if they are not in the users inventory...
 	db_print_rows(	"select itemdesc_short from item where currentroom = %s \
 			and itemid not in ( select distinct itemid from inventory \
-			where userid = %s )" % ( current_room, userid ), 'magenta')
+			where userid = %s ) order by static desc" % ( current_room, userid ), 'magenta')
 	time.sleep(0.3)
 #---------------------------------------------------------
 
@@ -196,7 +196,7 @@ def examine ():
 #---------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
 	available_items = db_query("select lower(itemname) from item where currentroom=%s" % current_room )
-	available_objects = db_query("select lower(objectname) from object where roomid=%s" % current_room )
+#	available_objects = db_query("select lower(objectname) from object where roomid=%s" % current_room )
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
 
 	# strip the action term from the user input to leave the item your examining.
@@ -213,12 +213,12 @@ def examine ():
 		db_print_rows("select itemdesc from item where lower(itemname)='%s'" % thing_to_examine)
 		print ("")
 		time.sleep(0.8)
-	elif thing_to_examine in available_objects:
-		print ("")
-		print ("You examine the %s..." % thing_to_examine )
-		time.sleep(1.3)
-		print ("")
-		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
+#	elif thing_to_examine in available_objects:
+#		print ("")
+#		print ("You examine the %s..." % thing_to_examine )
+#		time.sleep(1.3)
+#		print ("")
+#		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
 	elif thing_to_examine in available_npcs:
 		print ("")
 		print ("You examine the %s..." % thing_to_examine )
@@ -288,9 +288,13 @@ def take ():
 			print ("The %s looks similar to one you already have." % thing_to_take )
 			print ("You decide to leave it for another adventurer to find.")
 		else:
-			print ("You take the %s." % thing_to_take )
 			thing_to_take_id = db("select itemid from item where itemname = '%s'" % thing_to_take )
-			db("insert into inventory (userid, itemid) values ( '%s', '%s' )" % (userid, thing_to_take_id) )	
+			item_is_static = db("select static from item where itemid = %s" % thing_to_take_id )
+			if item_is_static == '1':
+				print ("The %s is too heavy for you to take with you!" % thing_to_take )
+			else:
+				print ("You take the %s." % thing_to_take )
+				db("insert into inventory (userid, itemid) values ( '%s', '%s' )" % (userid, thing_to_take_id) )	
 	else:
 		print ("You can't do that!")
 
