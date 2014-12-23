@@ -151,11 +151,12 @@ INSERT INTO "item" VALUES(1,'hammer','The hammer looks like a relic from a bygon
 like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0);
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
 like it would be worth a small fortune.',1,2,2,'You notice a diamond had been dropped here!',0);
-INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,2,'A keycard has been discarded here.',0);
+INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,3,'A keycard has been discarded here.',0);
 INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title spintel.  On the other side is a laser proof glass, 
 with wires behind it and a big circle in the middle, you notice on the side of the circle 
 is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0);
 INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
+INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -234,18 +235,17 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,6,100,'',116);
+INSERT INTO "user" VALUES(1,'Justin',0,3,100,'',122);
 INSERT INTO "user" VALUES(2,'Jensen',1,1,100,'',125);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,'',2);
-INSERT INTO "user" VALUES(6,'Amy',0,1,100,'',0);
 DELETE FROM sqlite_sequence;
-INSERT INTO "sqlite_sequence" VALUES('inventory',17);
+INSERT INTO "sqlite_sequence" VALUES('inventory',18);
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',8);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
 INSERT INTO "sqlite_sequence" VALUES('npc',2);
-INSERT INTO "sqlite_sequence" VALUES('item',5);
+INSERT INTO "sqlite_sequence" VALUES('item',6);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',45);
 INSERT INTO "sqlite_sequence" VALUES('user',6);
