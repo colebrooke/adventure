@@ -1,15 +1,5 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE "inventory" (
-    "inventid" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    "userid" INTEGER NOT NULL,
-    "itemid" INTEGER NOT NULL
-);
-INSERT INTO "inventory" VALUES(7,2,2);
-INSERT INTO "inventory" VALUES(9,4,3);
-INSERT INTO "inventory" VALUES(12,2,1);
-INSERT INTO "inventory" VALUES(13,2,3);
-INSERT INTO "inventory" VALUES(16,1,3);
 CREATE TABLE `q_and_a` (
 	`q_and_a_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`q_and_a_npcid`	INTEGER,
@@ -31,6 +21,11 @@ INSERT INTO "q_and_a" VALUES(5,1,'What''s an old man like you doing in a place l
 INSERT INTO "q_and_a" VALUES(6,1,'The old man says "I''ve been here for many years! Now leave me alone!"',NULL,1,1,NULL,NULL);
 INSERT INTO "q_and_a" VALUES(7,2,'What kind of droid are you?',1,0,1,8,NULL);
 INSERT INTO "q_and_a" VALUES(8,2,'The droid buzzes and bleeps. A small display lights up displaying the words "I AM A REPAIR DROID".',NULL,1,1,NULL,NULL);
+INSERT INTO "q_and_a" VALUES(9,4,'What kind of shop is this?',1,0,1,10,NULL);
+INSERT INTO "q_and_a" VALUES(10,4,'The shop keep says "My kind of shop!  I have many things for sale.
+You are most welcome here."',NULL,1,1,NULL,NULL);
+INSERT INTO "q_and_a" VALUES(11,4,'Can I see what you have for sale?',2,0,1,12,NULL);
+INSERT INTO "q_and_a" VALUES(12,4,'The shop keeper says "Of course, please take a look at my goods...."',NULL,1,1,NULL,1);
 CREATE TABLE "rooms" (
 	`roomid`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`roomdesc`	TEXT,
@@ -137,6 +132,13 @@ would have a few interesting stories to tell.
 INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
 arms sticking out.  It looks pretty dangerous in the wrong hands,
 or with the wrong programming....',7,7,50,100,1);
+INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle droid is tall an ungainly.  It looks very old, and is scored with
+black marks, which you presume are scars from laser blasts.
+It''s one green eye glows in it''s round head, giving you no clue of what
+the machine might be thinking.
+',20,20,50,100,1);
+INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
+and long blond hair. In his ear you can see a stange ear peice which is glowing red.',25,25,50,100,1);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,
@@ -150,13 +152,14 @@ CREATE TABLE "item" (
 INSERT INTO "item" VALUES(1,'hammer','The hammer looks like a relic from a bygone era. It''s of a heavy steel contruction and looks 
 like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0);
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
-like it would be worth a small fortune.',1,2,7,'You notice a diamond had been dropped here!',0);
+like it would be worth a small fortune.',1,2,12,'You notice a diamond had been dropped here!',0);
 INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,3,'A keycard has been discarded here.',0);
 INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title spintel.  On the other side is a laser proof glass, 
 with wires behind it and a big circle in the middle, you notice on the side of the circle 
 is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0);
 INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
+INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -200,7 +203,7 @@ INSERT INTO "route" VALUES(16,12,14,'n','A door leads to a side room north of yo
 INSERT INTO "route" VALUES(17,14,12,'s','A door to the south leads back to the cantina.');
 INSERT INTO "route" VALUES(18,7,2,'n','There is a courtyard area to the north.');
 INSERT INTO "route" VALUES(19,15,20,'w','To the west you can see the elevator which leads to the upper city.');
-INSERT INTO "route" VALUES(20,15,16,'e','There is a wide path to the east.');
+INSERT INTO "route" VALUES(20,15,29,'e','There is a wide path to the east.');
 INSERT INTO "route" VALUES(21,15,26,'n','A dark path appears to head northward between the piles of junk.');
 INSERT INTO "route" VALUES(22,20,21,'w','The door to the upper city elevator is to the west.');
 INSERT INTO "route" VALUES(23,20,15,'e','To the east you can see a narrow path, though the piles of scrap metal.');
@@ -222,7 +225,7 @@ INSERT INTO "route" VALUES(38,15,26,'n','Looking to the north there is a dark pa
 INSERT INTO "route" VALUES(39,10,27,'n','To the north, you can see a small dwelling.');
 INSERT INTO "route" VALUES(40,27,10,'s','In the south, you can see the lower city.');
 INSERT INTO "route" VALUES(41,13,29,'e','In the east there is a wider path.');
-INSERT INTO "route" VALUES(42,29,13,'w','To the west you can see a narrow path.');
+INSERT INTO "route" VALUES(42,29,15,'w','To the west you can see a narrow path.');
 INSERT INTO "route" VALUES(43,29,28,'n','In a northerly direction there is what looks like a junk area.');
 INSERT INTO "route" VALUES(44,29,2,'s','There is an archway to the south.');
 INSERT INTO "route" VALUES(45,28,29,'s','To the south there is a wide path.');
@@ -235,18 +238,30 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,7,100,'',125);
+INSERT INTO "user" VALUES(1,'Justin',0,4,100,'',131);
 INSERT INTO "user" VALUES(2,'Jensen',1,1,100,'',125);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,'',2);
+INSERT INTO "user" VALUES(7,'Richard',0,25,100,'',35);
+CREATE TABLE "inventory" (
+	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`userid`	INTEGER NOT NULL,
+	`itemid`	INTEGER NOT NULL
+);
+INSERT INTO "inventory" VALUES(7,2,2);
+INSERT INTO "inventory" VALUES(9,4,3);
+INSERT INTO "inventory" VALUES(12,2,1);
+INSERT INTO "inventory" VALUES(13,2,3);
+INSERT INTO "inventory" VALUES(16,1,3);
+INSERT INTO "inventory" VALUES(17,10004,7);
 DELETE FROM sqlite_sequence;
-INSERT INTO "sqlite_sequence" VALUES('inventory',19);
-INSERT INTO "sqlite_sequence" VALUES('q_and_a',8);
+INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
-INSERT INTO "sqlite_sequence" VALUES('npc',2);
-INSERT INTO "sqlite_sequence" VALUES('item',6);
+INSERT INTO "sqlite_sequence" VALUES('npc',4);
+INSERT INTO "sqlite_sequence" VALUES('item',7);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
-INSERT INTO "sqlite_sequence" VALUES('route',45);
-INSERT INTO "sqlite_sequence" VALUES('user',6);
+INSERT INTO "sqlite_sequence" VALUES('route',46);
+INSERT INTO "sqlite_sequence" VALUES('user',7);
+INSERT INTO "sqlite_sequence" VALUES('inventory',17);
 COMMIT;
