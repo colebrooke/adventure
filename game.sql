@@ -255,6 +255,12 @@ INSERT INTO "inventory" VALUES(12,2,1);
 INSERT INTO "inventory" VALUES(13,2,3);
 INSERT INTO "inventory" VALUES(16,1,3);
 INSERT INTO "inventory" VALUES(17,10004,7);
+CREATE TABLE `npc_inventory` (
+	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`npcid`	INTEGER NOT NULL,
+	`itemid`	INTEGER NOT NULL
+);
+INSERT INTO "npc_inventory" VALUES(1,4,7);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
@@ -264,4 +270,5 @@ INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
 INSERT INTO "sqlite_sequence" VALUES('inventory',17);
+INSERT INTO "sqlite_sequence" VALUES('npc_inventory',1);
 COMMIT;
