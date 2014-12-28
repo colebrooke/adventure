@@ -160,6 +160,8 @@ is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0
 INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
+INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'', it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
+',1,1,1,'There is a blaster pistol here.',0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -265,7 +267,7 @@ DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
 INSERT INTO "sqlite_sequence" VALUES('npc',4);
-INSERT INTO "sqlite_sequence" VALUES('item',7);
+INSERT INTO "sqlite_sequence" VALUES('item',8);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
