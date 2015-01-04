@@ -399,6 +399,40 @@ def sleep ():
 	
 
 
+def attack ():
+#----------------------------------------------------------------------
+	current_room = db("select location from user where userid=%s" % ( userid ) )
+	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
+
+	# strip the action term from the user input to leave the npc you're attacking...
+	if re.match (r'^attack ', userinput ):
+		npc_to_attack = userinput.replace('attack ', '')
+	elif re.match (r'^kill ', userinput ):
+		npc_to_attack = userinput.replace('kill', '')
+	elif re.match (r'^hit ', userinput ):
+		npc_to_attack = userinput.replace('hit', '')
+	elif re.match (r'^shoot ', userinput ):
+		npc_to_attack = userinput.replace('shoot', '')
+	
+	# always strip out 'the' from the input string...
+	if re.match (r'^the ', npc_to_attack ):
+		npc_to_attack = npc_to_attack.replace('the ', '')
+
+	print ("I think you're trying to attack the %s" % npc_to_attack )
+	if npc_to_attack in available_npcs:
+		print ("The %s is here, you try and attack!" % npc_to_attack )
+	else:
+		print ("The %s is nowhere to be seen, you can't attack!" % npc_to_attack )
+
+	# see if we are trying to use a weapon...
+	if re.match (r'with ', userinput ):
+		# then try and strip out the npc to leave the weapon...
+		weapon = re.match ( npc_to_attack , '')
+		print ("Chosen weapon: %s" % weapon )
+
+
+
+
 def look ():
 #----------------------------------------------------------------------
 	print_current_room( userid )
@@ -515,8 +549,10 @@ while loop == 1 :
 		sleep ()
 
 	# Help
-	elif (userinput == "help"):
-		help ()
+	elif (userinput == "help"): help ()
+
+	# Attack
+	elif re.match (r'^attack', userinput ):	attack ()
 
 	# Exit
 	elif (userinput == "exit") or (userinput == "quit"):

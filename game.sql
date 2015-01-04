@@ -304,7 +304,7 @@ CREATE TABLE "battle" (
 	`damage1`	TEXT,
 	`damage2`	TEXT
 );
-INSERT INTO "battle" VALUES(1,2,0,'You lunge forward carelessly with the','but in your haste miss your oponent entirely!',NULL,NULL);
+INSERT INTO "battle" VALUES(1,2,0,'You lunge forward carelessly with your WEAPON...','But in your haste miss your TARGET entirely!','The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
