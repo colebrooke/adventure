@@ -406,15 +406,16 @@ def attack ():
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
 	strength = db("select strength from user where userid=%s" % ( userid ) )
 	attack_force = (random.randint(1,10) * int(strength) )
+
 	# strip the action term from the user input to leave The npc you're attacking...
 	if re.match (r'^attack ', userinput ):
 		npc_to_attack = userinput.replace('attack ', '')
 	elif re.match (r'^kill ', userinput ):
-		npc_to_attack = userinput.replace('kill', '')
+		npc_to_attack = userinput.replace('kill ', '')
 	elif re.match (r'^hit ', userinput ):
-		npc_to_attack = userinput.replace('hit', '')
+		npc_to_attack = userinput.replace('hit ', '')
 	elif re.match (r'^shoot ', userinput ):
-		npc_to_attack = userinput.replace('shoot', '')
+		npc_to_attack = userinput.replace('shoot ', '')
 	
 	# always strip out 'the' from the input string...
 	if re.match (r'^the ', npc_to_attack ):
@@ -445,9 +446,9 @@ def look ():
 #======================================================================
 
 
-print ("-------------------------------------------------")
-print ("  Welcome to Justin & Jensens NEW Adventure game ")
-print ("-------------------------------------------------")
+print ("----------------------------------------")
+print ("  Welcome to the -Adventure- game ")
+print ("----------------------------------------")
 print ("""
    1  Log in an exsiting adventurer
    2  Create a new adventurer
@@ -518,7 +519,7 @@ while loop == 1 :
 
 
 	# Version1 direction interpretation	
-	if (userinput == "n") or (userinput == "north"): move ( "n", userid )
+	if   (userinput == "n") or (userinput == "north"): move ( "n", userid )
 	elif (userinput == "e") or (userinput == "east"): direction = "e"; move ( direction, userid )
 	elif (userinput == "s") or (userinput == "south"): direction = "s"; move ( direction, userid )
 	elif (userinput == "w") or (userinput == "west"): direction = "w"; move ( direction, userid )
@@ -530,12 +531,12 @@ while loop == 1 :
 	elif (userinput == "i") or (userinput == "inventory"): inventory ()
 
 	# Take / Pick up
-	elif re.match ( r'^take', userinput ) or \
+	elif 	re.match ( r'^take', userinput ) or \
 		re.match ( r'^pick up', userinput ) or \
 		re.match ( r'^get', userinput ): take ()		
 
 	# Drop / Put down
-	elif re.match ( r'^drop', userinput ) or \
+	elif 	re.match ( r'^drop', userinput ) or \
 		re.match ( r'^put down', userinput ): drop ()
 
 	# Examine
@@ -545,7 +546,7 @@ while loop == 1 :
 	elif (userinput == "look"): look ()	
 
 	# Talk
-	elif re.match ( r'^talk to', userinput ) or \
+	elif 	re.match ( r'^talk to', userinput ) or \
 		re.match ( r'speak to', userinput ): talk ()
 
 	# Sleep
@@ -556,7 +557,10 @@ while loop == 1 :
 	elif (userinput == "help"): help ()
 
 	# Attack
-	elif re.match (r'^attack', userinput ):	attack ()
+	elif	re.match (r'^attack', userinput ) or \
+		re.match (r'^kill', userinput ) or \
+		re.match (r'^hit', userinput ) or \
+		re.match (r'^shoot', userinput ):	attack ()
 
 	# Exit
 	elif (userinput == "exit") or (userinput == "quit"):
