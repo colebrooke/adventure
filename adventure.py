@@ -8,6 +8,7 @@ import os
 import time
 import fnmatch # this is for pattern matching files
 import re # for regex string matching
+import random # for battles and npc moves
 
 
 
@@ -403,8 +404,9 @@ def attack ():
 #----------------------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ) )
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
-
-	# strip the action term from the user input to leave the npc you're attacking...
+	strength = db("select strength from user where userid=%s" % ( userid ) )
+	attack_force = (random.randint(1,10) * int(strength) )
+	# strip the action term from the user input to leave The npc you're attacking...
 	if re.match (r'^attack ', userinput ):
 		npc_to_attack = userinput.replace('attack ', '')
 	elif re.match (r'^kill ', userinput ):
@@ -421,6 +423,8 @@ def attack ():
 	print ("I think you're trying to attack the %s" % npc_to_attack )
 	if npc_to_attack in available_npcs:
 		print ("The %s is here, you try and attack!" % npc_to_attack )
+		print ("Your attack_force is ", attack_force )
+
 	else:
 		print ("The %s is nowhere to be seen, you can't attack!" % npc_to_attack )
 
@@ -469,8 +473,8 @@ while True:
 			print("Not a valid username.  Returning to menu.")
 			break
 		else :
-			db("insert into user (name, score, location, health, userdesc, moves) \
-				values ( '%s', '0', '1', '100', '', '0' )" % username )
+			db("insert into user (name, score, location, health, strength, userdesc, moves) \
+				values ( '%s', '0', '1', '100', '10', '', '0' )" % username )
 			print("Created a new user.  You can now log in.")
 	
 	elif selection == '3':

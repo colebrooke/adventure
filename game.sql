@@ -242,21 +242,6 @@ INSERT INTO "route" VALUES(42,29,15,'w','To the west you can see a narrow path.'
 INSERT INTO "route" VALUES(43,29,28,'n','In a northerly direction there is what looks like a junk area.');
 INSERT INTO "route" VALUES(44,29,2,'s','There is an archway to the south.');
 INSERT INTO "route" VALUES(45,28,29,'s','To the south there is a wide path.');
-CREATE TABLE "user" (
-	`userid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT,
-	`score`	INT,
-	`location`	INT,
-	`health`	INT,
-	`userdesc`	TEXT,
-	`moves`	INTEGER NOT NULL DEFAULT (1)
-);
-INSERT INTO "user" VALUES(1,'Justin',0,4,100,'',137);
-INSERT INTO "user" VALUES(2,'Jensen',1,1,100,'',129);
-INSERT INTO "user" VALUES(3,'Ellie',0,1,100,'',11);
-INSERT INTO "user" VALUES(4,'Amy',0,2,100,'A tall teenager',8);
-INSERT INTO "user" VALUES(5,'Testing',0,7,100,'',2);
-INSERT INTO "user" VALUES(7,'Richard',0,25,100,'',35);
 CREATE TABLE "inventory" (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`userid`	INTEGER NOT NULL,
@@ -305,6 +290,22 @@ CREATE TABLE "battle" (
 	`damage2`	TEXT
 );
 INSERT INTO "battle" VALUES(1,2,0,'You lunge forward carelessly with your WEAPON...','But in your haste miss your TARGET entirely!','The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
+CREATE TABLE "user" (
+	`userid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`name`	TEXT,
+	`score`	INT,
+	`location`	INT,
+	`health`	INT,
+	`strength`	INTEGER,
+	`userdesc`	TEXT,
+	`moves`	INTEGER NOT NULL DEFAULT (1)
+);
+INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',139);
+INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',129);
+INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
+INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
+INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
+INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
@@ -312,8 +313,8 @@ INSERT INTO "sqlite_sequence" VALUES('npc',4);
 INSERT INTO "sqlite_sequence" VALUES('item',14);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
-INSERT INTO "sqlite_sequence" VALUES('user',7);
 INSERT INTO "sqlite_sequence" VALUES('inventory',19);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('battle',1);
+INSERT INTO "sqlite_sequence" VALUES('user',7);
 COMMIT;
