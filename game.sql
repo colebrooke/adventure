@@ -263,23 +263,6 @@ INSERT INTO "npc_inventory" VALUES(2,4,12);
 INSERT INTO "npc_inventory" VALUES(3,4,13);
 INSERT INTO "npc_inventory" VALUES(4,4,14);
 INSERT INTO "npc_inventory" VALUES(5,1,7);
-CREATE TABLE "weapon" (
-	`weaponid`	INTEGER NOT NULL,
-	`power`	INTEGER NOT NULL,
-	`type`	INTEGER NOT NULL,
-	PRIMARY KEY(weaponid)
-);
-INSERT INTO "weapon" VALUES(1,60,0);
-INSERT INTO "weapon" VALUES(7,150,1);
-INSERT INTO "weapon" VALUES(8,80,1);
-CREATE TABLE `weapon_type` (
-	`type`	INTEGER NOT NULL,
-	`typedesc`	TEXT,
-	PRIMARY KEY(type)
-);
-INSERT INTO "weapon_type" VALUES(0,NULL);
-INSERT INTO "weapon_type" VALUES(1,'This weapon can be used to shoot an oponent.');
-INSERT INTO "weapon_type" VALUES(2,'This weapon can be used to hit an oponent.');
 CREATE TABLE "battle" (
 	`battleid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`type`	INTEGER,
@@ -300,12 +283,31 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',139);
+INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',145);
 INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',129);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
+CREATE TABLE "weapon" (
+	`weaponid`	INTEGER NOT NULL,
+	`power`	INTEGER NOT NULL,
+	`accuracy`	INTEGER,
+	`type`	INTEGER NOT NULL,
+	PRIMARY KEY(weaponid)
+);
+INSERT INTO "weapon" VALUES(1,60,95,0);
+INSERT INTO "weapon" VALUES(7,150,60,1);
+INSERT INTO "weapon" VALUES(8,80,80,1);
+CREATE TABLE "weapon_type" (
+	`type`	INTEGER NOT NULL,
+	`typename`	TEXT,
+	`typedesc`	TEXT,
+	PRIMARY KEY(type)
+);
+INSERT INTO "weapon_type" VALUES(0,'Melee','This weapon can be used for hitting.');
+INSERT INTO "weapon_type" VALUES(1,'Pistol','This weapon can be used for shooting an oponent.');
+INSERT INTO "weapon_type" VALUES(2,'Rifle','This is a powerful weapon that can be used for shooting.');
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
@@ -317,4 +319,5 @@ INSERT INTO "sqlite_sequence" VALUES('inventory',19);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('battle',1);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
+CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
