@@ -161,7 +161,19 @@ INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It l
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'', it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
-',1,1,1,'There is a blaster pistol here.',0);
+',1,1,7,'There is a blaster pistol here.',0);
+INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
+INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
+It says ''Come to the droid shop for the best deals
+on R100 droids!''.',1,14,14,'A notice board is attached to one wall.',1);
+INSERT INTO "item" VALUES(11,'rock tower','The rock tower is contructed from large, flat,
+square blocks of stone.  It''s quite high and you
+can''t reach the top.
+There is some writing scrwaled around the base,
+which says ''All is red, all is white''.',1,20,20,'A rock tower has been constructed here.',1);
+INSERT INTO "item" VALUES(12,'alien meat','The alien meat is grey and slimy.  The thought of eating it is disgusting to you.',1,0,0,'The is some alien meat.',0);
+INSERT INTO "item" VALUES(13,'alien cookies','The alien cookies are grey and covered in silver insects. You suspect they are probably leathal to humans.',1,0,0,'There are some alien cookies here.',0);
+INSERT INTO "item" VALUES(14,'baked skima','The baked skima looks like a tasty dish. For alien spiders.',1,0,0,'Some baked skima is here.',0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -189,7 +201,6 @@ CREATE TABLE "route" (
 INSERT INTO "route" VALUES(1,1,2,'s','To the south, you see a courtyard.');
 INSERT INTO "route" VALUES(2,2,1,'n','To the north you can see your apartment.');
 INSERT INTO "route" VALUES(3,1,3,'n','There is a small door leading north.');
-INSERT INTO "route" VALUES(4,2,4,'w','To the west is a damaged escape pod.');
 INSERT INTO "route" VALUES(5,2,7,'s','To the south is a walkway that leads to the upper city south.');
 INSERT INTO "route" VALUES(6,1,6,'u','There is a ladder going up through a hatch in the ceiling.');
 INSERT INTO "route" VALUES(7,6,1,'d','There is a ladder leading down to your apartment');
@@ -240,8 +251,8 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,4,100,'',131);
-INSERT INTO "user" VALUES(2,'Jensen',1,1,100,'',125);
+INSERT INTO "user" VALUES(1,'Justin',0,4,100,'',137);
+INSERT INTO "user" VALUES(2,'Jensen',1,1,100,'',129);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,'',2);
@@ -256,21 +267,53 @@ INSERT INTO "inventory" VALUES(9,4,3);
 INSERT INTO "inventory" VALUES(12,2,1);
 INSERT INTO "inventory" VALUES(13,2,3);
 INSERT INTO "inventory" VALUES(16,1,3);
-INSERT INTO "inventory" VALUES(17,10004,7);
+INSERT INTO "inventory" VALUES(18,1,8);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
 	`itemid`	INTEGER NOT NULL
 );
 INSERT INTO "npc_inventory" VALUES(1,4,7);
+INSERT INTO "npc_inventory" VALUES(2,4,12);
+INSERT INTO "npc_inventory" VALUES(3,4,13);
+INSERT INTO "npc_inventory" VALUES(4,4,14);
+INSERT INTO "npc_inventory" VALUES(5,1,7);
+CREATE TABLE "weapon" (
+	`weaponid`	INTEGER NOT NULL,
+	`power`	INTEGER NOT NULL,
+	`type`	INTEGER NOT NULL,
+	PRIMARY KEY(weaponid)
+);
+INSERT INTO "weapon" VALUES(1,60,0);
+INSERT INTO "weapon" VALUES(7,150,1);
+INSERT INTO "weapon" VALUES(8,80,1);
+CREATE TABLE `weapon_type` (
+	`type`	INTEGER NOT NULL,
+	`typedesc`	TEXT,
+	PRIMARY KEY(type)
+);
+INSERT INTO "weapon_type" VALUES(0,NULL);
+INSERT INTO "weapon_type" VALUES(1,'This weapon can be used to shoot an oponent.');
+INSERT INTO "weapon_type" VALUES(2,'This weapon can be used to hit an oponent.');
+CREATE TABLE "battle" (
+	`battleid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`type`	INTEGER,
+	`level`	INTEGER,
+	`action1`	TEXT,
+	`action2`	TEXT,
+	`damage1`	TEXT,
+	`damage2`	TEXT
+);
+INSERT INTO "battle" VALUES(1,2,0,'You lunge forward carelessly with the','but in your haste miss your oponent entirely!',NULL,NULL);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
 INSERT INTO "sqlite_sequence" VALUES('npc',4);
-INSERT INTO "sqlite_sequence" VALUES('item',8);
+INSERT INTO "sqlite_sequence" VALUES('item',14);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
-INSERT INTO "sqlite_sequence" VALUES('inventory',17);
-INSERT INTO "sqlite_sequence" VALUES('npc_inventory',1);
+INSERT INTO "sqlite_sequence" VALUES('inventory',19);
+INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
+INSERT INTO "sqlite_sequence" VALUES('battle',1);
 COMMIT;

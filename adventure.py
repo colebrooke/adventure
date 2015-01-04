@@ -389,7 +389,14 @@ def talk ():
 		print ("You can't do that.")
 #----------------------------------------------------------------------
 
+def sleep ():
+	current_room = db("select location from user where userid=%s" % ( userid ) )
 
+	if current_room == 1:
+		print ("You go to sleep for a while on the bed.")
+	else:
+		print ("You manage to sleep for a few minutes on the hard floor.")
+	
 
 
 def look ():
@@ -502,6 +509,10 @@ while loop == 1 :
 	# Talk
 	elif re.match ( r'^talk to', userinput ) or \
 		re.match ( r'speak to', userinput ): talk ()
+
+	# Sleep
+	elif re.match ( r'^sleep', userinput ):
+		sleep ()
 
 	# Help
 	elif (userinput == "help"):
