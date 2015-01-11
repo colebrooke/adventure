@@ -263,16 +263,6 @@ INSERT INTO "npc_inventory" VALUES(2,4,12);
 INSERT INTO "npc_inventory" VALUES(3,4,13);
 INSERT INTO "npc_inventory" VALUES(4,4,14);
 INSERT INTO "npc_inventory" VALUES(5,1,7);
-CREATE TABLE "battle" (
-	`battleid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`type`	INTEGER,
-	`level`	INTEGER,
-	`action1`	TEXT,
-	`action2`	TEXT,
-	`damage1`	TEXT,
-	`damage2`	TEXT
-);
-INSERT INTO "battle" VALUES(1,2,0,'You lunge forward carelessly with your WEAPON...','But in your haste miss your TARGET entirely!','The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
 CREATE TABLE "user" (
 	`userid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`name`	TEXT,
@@ -308,6 +298,28 @@ CREATE TABLE "weapon_type" (
 INSERT INTO "weapon_type" VALUES(0,'Melee','This weapon can be used for hitting.');
 INSERT INTO "weapon_type" VALUES(1,'Pistol','This weapon can be used for shooting an oponent.');
 INSERT INTO "weapon_type" VALUES(2,'Rifle','This is a powerful weapon that can be used for shooting.');
+CREATE TABLE `battle_type` (
+	`type`	INTEGER,
+	`description`	INTEGER,
+	PRIMARY KEY(type)
+);
+INSERT INTO "battle_type" VALUES(0,NULL);
+INSERT INTO "battle_type" VALUES(1,'Pistol player attack');
+INSERT INTO "battle_type" VALUES(2,'Rifle player attack');
+INSERT INTO "battle_type" VALUES(10,'NPC melee attack');
+INSERT INTO "battle_type" VALUES(11,'NPC pistol attack');
+INSERT INTO "battle_type" VALUES(12,'NPC rifle attack');
+CREATE TABLE "battle" (
+	`battleid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`type`	INTEGER,
+	`level`	INTEGER,
+	`action1`	TEXT,
+	`action2`	TEXT
+);
+INSERT INTO "battle" VALUES(1,0,0,'You lunge forward carelessly with your WEAPON...','But in your haste miss the TARGET entirely!');
+INSERT INTO "battle" VALUES(2,0,1,'You take a swipe at your oponent, and almost miss, but your WEAPON connects with a glancing blow...','The TARGET stumbles backwards.');
+INSERT INTO "battle" VALUES(3,10,0,'The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
+INSERT INTO "battle" VALUES(4,10,1,'The TARGET steps forward and takes a mean swipe at you.','The blow catches you in the shoulder and you stumble backwards.');
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
@@ -317,7 +329,7 @@ INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
 INSERT INTO "sqlite_sequence" VALUES('inventory',19);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
-INSERT INTO "sqlite_sequence" VALUES('battle',1);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
+INSERT INTO "sqlite_sequence" VALUES('battle',4);
 CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
