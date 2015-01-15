@@ -424,7 +424,8 @@ def attack ():
 	print ("I think you're trying to attack the %s" % npc_to_attack )
 	if npc_to_attack in available_npcs:
 		print ("The %s is here, you try and attack!" % npc_to_attack )
-		print ("Your attack_force is ", attack_force )
+		print ("Your initial attack_force is ", attack_force )
+		battle ()
 
 	else:
 		print ("The %s is nowhere to be seen, you can't attack!" % npc_to_attack )
@@ -435,6 +436,10 @@ def attack ():
 		weapon = re.match ( npc_to_attack , '')
 		print ("Chosen weapon: %s" % weapon )
 
+
+#---------------------------------------------------------------------
+def battle ():
+	print ("Battle function.")
 
 
 

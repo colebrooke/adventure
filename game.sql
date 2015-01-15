@@ -128,17 +128,18 @@ CREATE TABLE "npc" (
 INSERT INTO "npc" VALUES(1,'Old Man','There is an old man here.','The old man is wearing rags, and has his head covered by a black hood.  
 He doesn''t look like he''s in the mood for a chat, but you can''t help thinking with the right motivation he
 would have a few interesting stories to tell.
-',4,4,50,100,1);
+',4,4,30,100,1);
 INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
 arms sticking out.  It looks pretty dangerous in the wrong hands,
-or with the wrong programming....',7,7,50,100,1);
+or with the wrong programming....',7,7,55,100,1);
 INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle droid is tall an ungainly.  It looks very old, and is scored with
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-',20,20,50,100,1);
+',20,20,65,100,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
-and long blond hair. In his ear you can see a stange ear peice which is glowing red.',25,25,50,100,1);
+and long blond hair. In his ear you can see a stange ear peice which is glowing red.',25,25,45,100,1);
+INSERT INTO "npc" VALUES(5,'',NULL,NULL,0,0,NULL,NULL,NULL);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,
@@ -160,7 +161,8 @@ is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0
 INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
-INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'', it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
+INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
+it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
 ',1,1,7,'There is a blaster pistol here.',0);
 INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
 INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
@@ -174,6 +176,8 @@ which says ''All is red, all is white''.',1,20,20,'A rock tower has been constru
 INSERT INTO "item" VALUES(12,'alien meat','The alien meat is grey and slimy.  The thought of eating it is disgusting to you.',1,0,0,'The is some alien meat.',0);
 INSERT INTO "item" VALUES(13,'alien cookies','The alien cookies are grey and covered in silver insects. You suspect they are probably leathal to humans.',1,0,0,'There are some alien cookies here.',0);
 INSERT INTO "item" VALUES(14,'baked skima','The baked skima looks like a tasty dish. For alien spiders.',1,0,0,'Some baked skima is here.',0);
+INSERT INTO "item" VALUES(15,'gas mask',NULL,1,0,0,'You see a gas mask here',0);
+INSERT INTO "item" VALUES(16,'',NULL,'',NULL,NULL,NULL,0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -253,6 +257,7 @@ INSERT INTO "inventory" VALUES(12,2,1);
 INSERT INTO "inventory" VALUES(13,2,3);
 INSERT INTO "inventory" VALUES(16,1,3);
 INSERT INTO "inventory" VALUES(18,1,8);
+INSERT INTO "inventory" VALUES(20,2,8);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -274,7 +279,7 @@ CREATE TABLE "user" (
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
 INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',145);
-INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',129);
+INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',157);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
@@ -320,14 +325,19 @@ INSERT INTO "battle" VALUES(1,0,0,'You lunge forward carelessly with your WEAPON
 INSERT INTO "battle" VALUES(2,0,1,'You take a swipe at your oponent, and almost miss, but your WEAPON connects with a glancing blow...','The TARGET stumbles backwards.');
 INSERT INTO "battle" VALUES(3,10,0,'The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
 INSERT INTO "battle" VALUES(4,10,1,'The TARGET steps forward and takes a mean swipe at you.','The blow catches you in the shoulder and you stumble backwards.');
+CREATE TABLE `user_battle` (
+	`userid`	INTEGER,
+	`npcid`	INTEGER
+);
+INSERT INTO "user_battle" VALUES(1,1);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
 INSERT INTO "sqlite_sequence" VALUES('rooms',29);
-INSERT INTO "sqlite_sequence" VALUES('npc',4);
-INSERT INTO "sqlite_sequence" VALUES('item',14);
+INSERT INTO "sqlite_sequence" VALUES('npc',5);
+INSERT INTO "sqlite_sequence" VALUES('item',16);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',46);
-INSERT INTO "sqlite_sequence" VALUES('inventory',19);
+INSERT INTO "sqlite_sequence" VALUES('inventory',20);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
 INSERT INTO "sqlite_sequence" VALUES('battle',4);
