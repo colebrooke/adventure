@@ -31,6 +31,7 @@ The setup.sh bash script is to create the .db binary from the game.sql file.
 
 Contributors
 ------------
-Justin Miller (@colebrooke)
-Jensen Miller (@colebrooke101)
+- [Jensen Miller](http://github.com/colebrooke101)
+- [Justin Miller](http://github.com/colebrooke)
+- [Clarkie](http://github.com/clarkie)
 
