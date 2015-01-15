@@ -1,7 +1,8 @@
-Author: Justin Miller / Jensen Miller
-
 This is a text based science fiction themed adventure game, written in Python 3.
 The database back end is created in SQLite3.
+
+![Preview](img/screenie.png)
+
 
 The game is still under development, there are plenty of non-working features!
 
@@ -28,5 +29,8 @@ On OSX / Linux, at the command line, run the following commands:-
 The setup.sh bash script is to create the .db binary from the game.sql file.
 
 
-
+Contributors
+------------
+Justin Miller (@colebrooke)
+Jensen Miller (@colebrooke101)
 
