@@ -14,12 +14,14 @@ Setup
 -----
 On OSX / Linux, at the command line, run the following commands:-
 
+```Shell
 # git clone http://github.com/colebrooke/adventure.git
 # cd adventure
 # chmod +x adventure.py
 # chmod +x setup.sh
 # ./setup.sh
 # ./adventure.py
+```
 
 The setup.sh bash script is to create the .db binary from the game.sql file.
 
