@@ -26,6 +26,8 @@ INSERT INTO "q_and_a" VALUES(10,4,'The shop keep says "My kind of shop!  I have 
 You are most welcome here."',NULL,1,1,NULL,NULL);
 INSERT INTO "q_and_a" VALUES(11,4,'Can I see what you have for sale?',2,0,1,12,NULL);
 INSERT INTO "q_and_a" VALUES(12,4,'The shop keeper says "Of course, please take a look at my goods...."',NULL,1,1,NULL,1);
+INSERT INTO "q_and_a" VALUES(13,1,'How long have you been on this planet?',4,0,1,14,NULL);
+INSERT INTO "q_and_a" VALUES(14,1,'The old man says "I''ve been on this planet about 6 years.  I was forced to leave planet Anmar by the Tabuchi tribe, who kill inocent people."',NULL,1,1,NULL,NULL);
 CREATE TABLE "rooms" (
 	`roomid`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`roomdesc`	TEXT,
@@ -112,6 +114,7 @@ A strange humming noise pervades the air, and you can''t decern it''s source.','
 INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There are piles of junk all
 around you, and it''s hard to find your way.
 ','Wide Path');
+INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
 CREATE TABLE "npc" (
 	`npcid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcname`	TEXT NOT NULL,
@@ -209,7 +212,7 @@ INSERT INTO "route" VALUES(7,6,1,'d','There is a ladder leading down to your apa
 INSERT INTO "route" VALUES(8,7,9,'w','In the west you can see a Cantina.');
 INSERT INTO "route" VALUES(9,8,21,'e','To the east is the door to the lower city.');
 INSERT INTO "route" VALUES(10,3,1,'s','A small door is south of you.');
-INSERT INTO "route" VALUES(11,10,11,'n','To the north you can see a wide path.');
+INSERT INTO "route" VALUES(11,10,29,'n','To the north you can see a wide path.');
 INSERT INTO "route" VALUES(12,8,7,'w','In the west is a path to the Upper City South.');
 INSERT INTO "route" VALUES(13,9,7,'e','In the east you can see the Upper City South.');
 INSERT INTO "route" VALUES(14,9,12,'w','To the west of you there is the main entrance to the cantina.');
@@ -237,13 +240,17 @@ INSERT INTO "route" VALUES(35,25,24,'s','The exit of the shop is south of you.')
 INSERT INTO "route" VALUES(36,21,8,'w','In the west there is a bridge across the city.');
 INSERT INTO "route" VALUES(37,26,15,'s','To the south there is a narrow path.');
 INSERT INTO "route" VALUES(38,15,26,'n','Looking to the north there is a dark path.');
-INSERT INTO "route" VALUES(39,10,27,'n','To the north, you can see a small dwelling.');
-INSERT INTO "route" VALUES(40,27,10,'s','In the south, you can see the lower city.');
+INSERT INTO "route" VALUES(39,10,27,'e','To the east, you can see a small dwelling.');
+INSERT INTO "route" VALUES(40,27,10,'w','In the west, you can see an archway.');
 INSERT INTO "route" VALUES(41,13,29,'e','In the east there is a wider path.');
 INSERT INTO "route" VALUES(42,29,15,'w','To the west you can see a narrow path.');
 INSERT INTO "route" VALUES(43,29,28,'n','In a northerly direction there is what looks like a junk area.');
-INSERT INTO "route" VALUES(44,29,2,'s','There is an archway to the south.');
+INSERT INTO "route" VALUES(44,29,10,'s','There is an archway to the south.');
 INSERT INTO "route" VALUES(45,28,29,'s','To the south there is a wide path.');
+INSERT INTO "route" VALUES(47,10,11,'w','To the west you can see what appears to be a droid shop.');
+INSERT INTO "route" VALUES(48,11,10,'e','Eastwards you see the archway.');
+INSERT INTO "route" VALUES(49,11,30,'s','There is a room to the south of you.');
+INSERT INTO "route" VALUES(50,30,11,'n','To the north is the droid shop.');
 CREATE TABLE "inventory" (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`userid`	INTEGER NOT NULL,
@@ -277,7 +284,7 @@ CREATE TABLE "user" (
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
 INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',145);
-INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',157);
+INSERT INTO "user" VALUES(2,'Jensen',1,10,100,10,'',218);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
@@ -329,12 +336,12 @@ CREATE TABLE `user_battle` (
 );
 INSERT INTO "user_battle" VALUES(1,1);
 DELETE FROM sqlite_sequence;
-INSERT INTO "sqlite_sequence" VALUES('q_and_a',12);
-INSERT INTO "sqlite_sequence" VALUES('rooms',29);
+INSERT INTO "sqlite_sequence" VALUES('q_and_a',14);
+INSERT INTO "sqlite_sequence" VALUES('rooms',30);
 INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',16);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
-INSERT INTO "sqlite_sequence" VALUES('route',46);
+INSERT INTO "sqlite_sequence" VALUES('route',50);
 INSERT INTO "sqlite_sequence" VALUES('inventory',20);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
