@@ -110,10 +110,7 @@ for a long time.
 A strange humming noise pervades the air, and you can''t decern it''s source.','Junk Area');
 INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There are piles of junk all
 around you, and it''s hard to find your way.
-
-Possible exits are to the west, where you can see a narrow path.
-To the north, you can see a way between piles of junk.
-To the south, there is an archway made of junk.','Wide Path');
+','Wide Path');
 CREATE TABLE "npc" (
 	`npcid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcname`	TEXT NOT NULL,
@@ -214,7 +211,7 @@ INSERT INTO "route" VALUES(10,3,1,'s','A small door is south of you.');
 INSERT INTO "route" VALUES(11,10,11,'n','To the north you can see a wide path.');
 INSERT INTO "route" VALUES(12,8,7,'w','In the west is a path to the Upper City South.');
 INSERT INTO "route" VALUES(13,9,7,'e','In the east you can see the Upper City South.');
-INSERT INTO "route" VALUES(14,9,12,'w','To the west of you there is the main entance to the cantina.');
+INSERT INTO "route" VALUES(14,9,12,'w','To the west of you there is the main entrance to the cantina.');
 INSERT INTO "route" VALUES(15,12,9,'e','The exit of the cantina is to the east.');
 INSERT INTO "route" VALUES(16,12,14,'n','A door leads to a side room north of you.');
 INSERT INTO "route" VALUES(17,14,12,'s','A door to the south leads back to the cantina.');
