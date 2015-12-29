@@ -140,7 +140,11 @@ the machine might be thinking.
 ',20,20,65,100,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
 and long blond hair. In his ear you can see a stange ear peice which is glowing red.',25,25,45,100,1);
-INSERT INTO "npc" VALUES(5,'',NULL,NULL,0,0,NULL,NULL,NULL);
+INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
+He is dressed in a white vest, grey cargo trousers,
+and has a tape rapped around one of his hands.
+You also notice a scar along his neck stopping at his collar bone.
+ ',0,0,NULL,NULL,NULL);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,
