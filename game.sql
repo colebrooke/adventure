@@ -31,7 +31,7 @@ CREATE TABLE "rooms" (
 	`roomdesc`	TEXT,
 	`roomname`	TEXT
 );
-INSERT INTO "rooms" VALUES(1,'You are on the planet Terris.  You are in a well funished apartment.  
+INSERT INTO "rooms" VALUES(1,'You are on the planet Valmar.  You are in a well funished apartment.  
 There are comfortable sofas, and a large vision screen.  There is a bed 
 in the corner.
 ','Apartment');
@@ -96,14 +96,15 @@ INSERT INTO "rooms" VALUES(24,'You are outside a small shop.  There is a dirty o
 A window displays books, alien bric a brak, and various weapons.','Outside Shop Milbraged');
 INSERT INTO "rooms" VALUES(25,'You walk through the blue automatic door, you see rows and rows of shelves with a selection of tin can foods; bags of rice; super refreshing water; 
 cheap alcohol that could be used as a weapon, foreign galactic ice cream and local alien meat.
-You also see a book which says S.A.F.A (which is the special alien fighting agency) all alien fighting secrets revealed.  
+You also see a book which says S.A.F.A (which is the Special Alien Fighting Agency) all alien fighting secrets revealed!  
 And at the very back is the til.','Shop Milbraged');
 INSERT INTO "rooms" VALUES(26,'You are in a very dark path between piles of junk.  You can dimly see
 the junk towering above you.','Dark Path');
-INSERT INTO "rooms" VALUES(27,'You are in a small dwelling, which is fashioned out of discarded metal panels
-and junk.  It doesn''t look like a very comfortable place to live.
-The earth beneath foot is damp and partly hidden a towering cabinet over 
-flowing with tools.','Small Dwelling');
+INSERT INTO "rooms" VALUES(27,'You are in a small dwelling, which is fashioned out of discarded metal panels and junk.  
+It doesn''t look like a very comfortable place to live.
+You see a small vision screen on the floor which has been smashed after years of use.
+There is also a bed made out of scraps of wood and metel on the floor, which smells like Delmarbeer.
+','Small Dwelling');
 INSERT INTO "rooms" VALUES(28,'You''re in a large open junk area, with a dusty clearing in the middle.
 A layer of dust covers everything, suggesting nothing has been touched
 for a long time.
