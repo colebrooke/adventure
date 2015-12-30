@@ -391,6 +391,7 @@ def talk ():
 #----------------------------------------------------------------------
 
 def sleep ():
+#---------------------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ) )
 
 	if current_room == 1:
@@ -405,6 +406,9 @@ def attack ():
 	current_room = db("select location from user where userid=%s" % ( userid ) )
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
 	strength = db("select strength from user where userid=%s" % ( userid ) )
+	# attack force will be a random int between 1 and 10,
+	# multiplied by the player strength.
+	# TODO: add in weapon strength.
 	attack_force = (random.randint(1,10) * int(strength) )
 
 	# strip the action term from the user input to leave The npc you're attacking...
@@ -421,8 +425,9 @@ def attack ():
 	if re.match (r'^the ', npc_to_attack ):
 		npc_to_attack = npc_to_attack.replace('the ', '')
 
-	print ("I think you're trying to attack the %s" % npc_to_attack )
+	print ("You move to attack the %s" % npc_to_attack )
 	if npc_to_attack in available_npcs:
+		# attack only viable if NPC is in the room...
 		print ("The %s is here, you try and attack!" % npc_to_attack )
 		print ("Your initial attack_force is ", attack_force )
 		battle ()
@@ -438,8 +443,26 @@ def attack ():
 
 
 #---------------------------------------------------------------------
+
+
+
+
 def battle ():
-	print ("Battle function.")
+#---------------------------------------------------------------------
+	print ("You have commenced battle!")
+	inflict_battle_damage ()
+	take_battle_damage ()
+
+
+
+def inflict_battle_damage ():
+#---------------------------------------------------------------------
+	print ('You inflict no damage to the %s', npc_to_attack )
+
+
+def take_battle_damage ():
+#---------------------------------------------------------------------
+	print ('You have suffered no damage from the %s', npc_to_attack )
 
 
 
