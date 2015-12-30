@@ -115,6 +115,9 @@ INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There 
 around you, and it''s hard to find your way.
 ','Wide Path');
 INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
+INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper litterd around.
+There are shelves put in different corners of the room holding different types of wines, one you spot is worth a 1000 credits.
+But you also see a camera positioned in the corner of the room.','Cantina basement');
 CREATE TABLE "npc" (
 	`npcid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcname`	TEXT NOT NULL,
@@ -255,6 +258,8 @@ INSERT INTO "route" VALUES(47,10,11,'w','To the west you can see what appears to
 INSERT INTO "route" VALUES(48,11,10,'e','Eastwards you see the archway.');
 INSERT INTO "route" VALUES(49,11,30,'s','There is a room to the south of you.');
 INSERT INTO "route" VALUES(50,30,11,'n','To the north is the droid shop.');
+INSERT INTO "route" VALUES(51,12,31,'d','A staircase leads downwards.');
+INSERT INTO "route" VALUES(52,31,12,'u','A staircase leads upwards.');
 CREATE TABLE "inventory" (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`userid`	INTEGER NOT NULL,
@@ -288,7 +293,7 @@ CREATE TABLE "user" (
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
 INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',145);
-INSERT INTO "user" VALUES(2,'Jensen',1,10,100,10,'',218);
+INSERT INTO "user" VALUES(2,'Jensen',1,31,100,10,'',231);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
@@ -317,7 +322,7 @@ CREATE TABLE `battle_type` (
 	`description`	INTEGER,
 	PRIMARY KEY(type)
 );
-INSERT INTO "battle_type" VALUES(0,NULL);
+INSERT INTO "battle_type" VALUES(0,'Melee player attack');
 INSERT INTO "battle_type" VALUES(1,'Pistol player attack');
 INSERT INTO "battle_type" VALUES(2,'Rifle player attack');
 INSERT INTO "battle_type" VALUES(10,'NPC melee attack');
@@ -341,11 +346,11 @@ CREATE TABLE `user_battle` (
 INSERT INTO "user_battle" VALUES(1,1);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',14);
-INSERT INTO "sqlite_sequence" VALUES('rooms',30);
+INSERT INTO "sqlite_sequence" VALUES('rooms',31);
 INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',16);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
-INSERT INTO "sqlite_sequence" VALUES('route',50);
+INSERT INTO "sqlite_sequence" VALUES('route',52);
 INSERT INTO "sqlite_sequence" VALUES('inventory',20);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',7);
