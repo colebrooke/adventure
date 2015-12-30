@@ -299,7 +299,6 @@ INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
-INSERT INTO "user" VALUES(8,'pvt 004',0,6,100,10,'',3);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -345,6 +344,20 @@ INSERT INTO "battle" VALUES(5,0,10,'You masterfully slice your WEAPON through th
 INSERT INTO "battle" VALUES(6,10,10,'The TARGET suprises you with a quick lunge from his WEAPON!','You receive a severe impact to the head!');
 INSERT INTO "battle" VALUES(7,0,2,'You lash out hastily with your WEAPON.','Your WEAPON delivers a glancing blow to the TARGET.');
 INSERT INTO "battle" VALUES(8,10,2,'The TARGET tries to smash you hard with their WEAPON.','They strike home, but the pain is not as severe as you feared.');
+INSERT INTO "battle" VALUES(9,0,3,'You quickly dash forward and strike.','Your WEAPON delivers a blow to the TARGET, and they stumble back.');
+INSERT INTO "battle" VALUES(10,10,3,'The TARGET swings his WEAPON menacingly. They swing a violent attack.','You catch a blow to the head and your vision blurs for a few seconds.');
+INSERT INTO "battle" VALUES(11,0,4,'You strike hard and fast with your WEAPON.','You manage to smash the TARGET backward.');
+INSERT INTO "battle" VALUES(12,10,4,'The TARGET dances from side to side, then suddenly is apon you in a frenzy of blows!','You take some damage, but protect yourself as best you can.');
+INSERT INTO "battle" VALUES(13,0,5,'You take a deep breath and drive your WEAPON straight into the TARGET...','The TARGET staggers back, obviously hurt by your assult.');
+INSERT INTO "battle" VALUES(14,10,5,'The TARGET swings his WEAPON and belts you with all his force!','You step to one side, but the blow still catches you!');
+INSERT INTO "battle" VALUES(15,0,6,'You step back, but as your oponent advances, you swipe your WEAPON and hit him hard...','The TARGET stumbles, hurt by your attack.');
+INSERT INTO "battle" VALUES(16,10,6,'The TARGET stikes without warning!','You were not expecting that! And it hurt!');
+INSERT INTO "battle" VALUES(17,0,7,'Your eyes glint as you swing your WEAPON and stike...','Your WEAPON connects with a powerful thud and injures the TARGET!');
+INSERT INTO "battle" VALUES(18,10,7,'The TARGET steps forward and lashes out agressively!','You are hit in the head, and nearly fall!');
+INSERT INTO "battle" VALUES(19,0,8,'Somehow you find the strength to smash home a devistating blow!','The TARGET is hit in the body and falls back!');
+INSERT INTO "battle" VALUES(20,10,8,'The TARGET spins his WEAPON and masterfully smashes you!','You stagger backwards in pain!');
+INSERT INTO "battle" VALUES(21,0,9,'You raise your WEAPON and deliver a powerful blow!','You manage to hit your TARGET in the head!');
+INSERT INTO "battle" VALUES(22,10,9,'The TARGET slices his WEAPON to deliver a powerful blow!','You cry out in pain as the WEAPON hits your head!');
 CREATE TABLE `user_battle` (
 	`userid`	INTEGER,
 	`npcid`	INTEGER
@@ -360,6 +373,6 @@ INSERT INTO "sqlite_sequence" VALUES('route',52);
 INSERT INTO "sqlite_sequence" VALUES('inventory',21);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',8);
-INSERT INTO "sqlite_sequence" VALUES('battle',8);
+INSERT INTO "sqlite_sequence" VALUES('battle',23);
 CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
