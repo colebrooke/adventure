@@ -125,7 +125,7 @@ CREATE TABLE "npc" (
 	`npclongdesc`	TEXT,
 	`npcroom`	INTEGER NOT NULL,
 	`npcstartroom`	INTEGER NOT NULL,
-	`npcsrength`	INTEGER,
+	`npcstrength`	INTEGER,
 	`npchealth`	INTEGER,
 	`npcstatus`	INTEGER
 );

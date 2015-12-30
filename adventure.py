@@ -430,7 +430,7 @@ def attack ():
 		# attack only viable if NPC is in the room...
 		print ("The %s is here, you try and attack!" % npc_to_attack )
 		print ("Your initial attack_force is ", attack_force )
-		battle ()
+		battle ( npc_to_attack )
 
 	else:
 		print ("The %s is nowhere to be seen, you can't attack!" % npc_to_attack )
@@ -447,23 +447,61 @@ def attack ():
 
 
 
-def battle ():
+def battle ( npc ):
 #---------------------------------------------------------------------
-	print ("You have commenced battle!")
-	inflict_battle_damage ()
-	take_battle_damage ()
+	strength = db("select strength from user where userid=%s" % ( userid ) )
+	npc_strength = db("select npcstrength from npc where npcname like '%s'" % (npc) )
+	print ("npc stregth", npc_strength)
+	#
+	print ("You have commenced battle with the %s!" % npc )
+
+	# some temp variables whilst developing this feature
+
+	my_weapon = 'fist'
+	target_weapon = 'fist'
+	
+	loop = 0
+	while loop < 4:
+		# for now, there are only 4 actions 
+		loop = loop + 1
+		
+		attack_force = int(random.randint(1,10) * int(strength) / 10 )
+		npc_attack_force = int(random.randint(1,10) * int(npc_strength) / 10 )
+
+		print ("")
+		
+		time.sleep(3)
+		db_print_rows('select action1 from battle where type=0 and level=%s' % attack_force )
+		time.sleep(3)
+		
+		db_print_rows('select action2 from battle where type=0 and level=%s' % attack_force )
+		time.sleep(3)
+		inflict_battle_damage ( npc )
+
+		print ("")	
+		db_print_rows('select action1 from battle where type=10 and level=%s' % npc_attack_force )
+		time.sleep(3)
+		db_print_rows('select action2 from battle where type=10 and level=%s' % npc_attack_force )
+		time.sleep(3)
+		take_battle_damage  ( npc )
+		print("")
 
 
-
-def inflict_battle_damage ():
+def inflict_battle_damage ( npc ):
 #---------------------------------------------------------------------
-	print ('You inflict no damage to the %s', npc_to_attack )
+	time.sleep(1)
+	print ("")
+	print ("You inflict no damage to the", npc )
+	print ("")
+	time.sleep(2)
 
-
-def take_battle_damage ():
+def take_battle_damage ( npc ):
 #---------------------------------------------------------------------
-	print ('You have suffered no damage from the %s', npc_to_attack )
-
+	time.sleep(1)
+	print ("")
+	print ("You have suffered no damage from the", npc )
+	print ("")
+	time.sleep(2)
 
 
 def look ():
