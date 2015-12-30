@@ -341,6 +341,10 @@ INSERT INTO "battle" VALUES(1,0,0,'You lunge forward carelessly with your WEAPON
 INSERT INTO "battle" VALUES(2,0,1,'You take a swipe at your oponent, and almost miss, but your WEAPON connects with a glancing blow...','The TARGET stumbles backwards.');
 INSERT INTO "battle" VALUES(3,10,0,'The TARGET lunges at you with his WEAPON...','You step to one side, and your oponent misses you!');
 INSERT INTO "battle" VALUES(4,10,1,'The TARGET steps forward and takes a mean swipe at you.','The blow catches you in the shoulder and you stumble backwards.');
+INSERT INTO "battle" VALUES(5,0,10,'You masterfully slice your WEAPON through the air...','The blow connects with deverstating impact!');
+INSERT INTO "battle" VALUES(6,10,10,'The TARGET suprises you with a quick lunge from his WEAPON!','You receive a severe impact to the head!');
+INSERT INTO "battle" VALUES(7,0,2,'You lash out hastily with your WEAPON.','Your WEAPON delivers a glancing blow to the TARGET.');
+INSERT INTO "battle" VALUES(8,10,2,'The TARGET tries to smash you hard with their WEAPON.','They strike home, but the pain is not as severe as you feared.');
 CREATE TABLE `user_battle` (
 	`userid`	INTEGER,
 	`npcid`	INTEGER
@@ -356,6 +360,6 @@ INSERT INTO "sqlite_sequence" VALUES('route',52);
 INSERT INTO "sqlite_sequence" VALUES('inventory',21);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',8);
-INSERT INTO "sqlite_sequence" VALUES('battle',4);
+INSERT INTO "sqlite_sequence" VALUES('battle',8);
 CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
