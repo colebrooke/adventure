@@ -460,32 +460,70 @@ def battle ( npc ):
 	my_weapon = 'fist'
 	target_weapon = 'fist'
 	
-	loop = 0
-	while loop < 4:
-		# for now, there are only 4 actions 
-		loop = loop + 1
-		
+	#loop = 0
+	while True:
+		# for now, there are only 2 actions 
+		#loop = loop + 1
+
+		# get npc current health
+		npc_health = db('select npchealth from npc where npcname like "%s"' % npc )
+
+		# get player health
+		user_health = db('select health from user where userid = %s' % userid )
+
+		# calculate attack force, random int from 1 to 10, multipled by player strength, / 10
 		attack_force = int(random.randint(1,10) * int(strength) / 10 )
+
+		# same for npc attack force
 		npc_attack_force = int(random.randint(1,10) * int(npc_strength) / 10 )
 
 		print ("")
 		
 		time.sleep(3)
+
+		# display first attack description, from the user (type=0)
 		db_print_rows('select action1 from battle where type=0 and level=%s' % attack_force )
 		time.sleep(3)
-		
+		# display attack result...
 		db_print_rows('select action2 from battle where type=0 and level=%s' % attack_force )
 		time.sleep(3)
-		inflict_battle_damage ( npc )
+		# inflict damage on oponent...
+		new_npc_health = ( int( npc_health ) - int ( attack_force ) )
+		db('update npc set npchealth = %s where npcname like "%s"' % ( new_npc_health, npc ))
+		# for debugging, print npc health...
+		print ('npc health:', npc_health )
 
-		print ("")	
+		print ("")
+		# display first attack description, from npc (type=10)	
 		db_print_rows('select action1 from battle where type=10 and level=%s' % npc_attack_force )
 		time.sleep(3)
+		# display attack result...
 		db_print_rows('select action2 from battle where type=10 and level=%s' % npc_attack_force )
 		time.sleep(3)
-		take_battle_damage  ( npc )
+		# take damage given by npc...
+		new_user_health = ( int( user_health ) - int ( npc_attack_force ) )
+		db('update user set health = %s where userid = %s' % ( new_user_health, userid ))
 		print("")
+		# for debugging, display user health...
+		print ('user health:', user_health )
+		
 
+		print ('Do you want to continue the battle?')
+		print ("""
+   	1  Continue the battle!
+   	2  Admit defeat and run away!
+
+	""")
+ 
+		while True: 
+			selection=input("Enter your choice: ") 
+			if selection =='1':
+				print ('You brace yourself to continue the battle!') 
+				break
+			elif selection == '2':
+				print ('You decide to run away.  Oh dear. You find you are routed to the spot!')
+				break
+	
 
 def inflict_battle_damage ( npc ):
 #---------------------------------------------------------------------
