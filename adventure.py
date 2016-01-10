@@ -425,7 +425,6 @@ def attack ():
 	if re.match (r'^the ', npc_to_attack ):
 		npc_to_attack = npc_to_attack.replace('the ', '')
 
-	print ("You move to attack the %s" % npc_to_attack )
 	if npc_to_attack in available_npcs:
 		# attack only viable if NPC is in the room...
 		#print ("The %s is here, you try and attack!" % npc_to_attack )
@@ -474,32 +473,46 @@ def battle ( npc ):
 		time.sleep(3)
 
 		# display first attack description, from the user (type=0)
-		db_print_rows('select action1 from battle where type=0 and level=%s' % attack_force )
+		battle_action = db('select action1 from battle where type=0 and level=%s' % attack_force )
+		battle_action = ( battle_action.replace ( 'WEAPON', my_weapon ) )
+		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
+		print ( battle_action )
 		time.sleep(3)
 		# display attack result...
-		db_print_rows('select action2 from battle where type=0 and level=%s' % attack_force )
+		battle_action = db('select action2 from battle where type=0 and level=%s' % attack_force )
+		battle_action = ( battle_action.replace ( 'WEAPON', my_weapon ) )
+		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
+		print ( battle_action )
 		time.sleep(3)
 		# inflict damage on oponent...
 		new_npc_health = ( int( npc_health ) - int ( attack_force ) )
 		db('update npc set npchealth = %s where npcname like "%s"' % ( new_npc_health, npc ))
 		# for debugging, print npc health...
-		#print ('npc health:', npc_health )
+		print ('npc health:', npc_health )
 		# if npc health is less than 0, the npc is killed...
 		if int(new_npc_health) <= 0: 
 			npc_dies (npc)		
 			break
 		# display first attack description, from npc (type=10)	
-		db_print_rows('select action1 from battle where type=10 and level=%s' % int(npc_attack_force) )
+		battle_action = db('select action1 from battle where type=10 and level=%s' % int(npc_attack_force) )
+		battle_action = ( battle_action.replace ( 'WEAPON', 'sword' ) )
+		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
+		print ( battle_action )
+
 		time.sleep(3)
 		# display attack result...
-		db_print_rows('select action2 from battle where type=10 and level=%s' % int(npc_attack_force) )
+		battle_action = db('select action2 from battle where type=10 and level=%s' % int(npc_attack_force) )
+		battle_action = ( battle_action.replace ( 'WEAPON', 'sword' ) )
+		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
+		print ( battle_action )
+
 		time.sleep(3)
 		# take damage given by npc...
 		new_user_health = ( int( user_health ) - int ( npc_attack_force ) )
 		db('update user set health = %s where userid = %s' % ( new_user_health, userid ))
 		print("")
 		# for debugging, display user health...
-		#print ('user health:', new_user_health )
+		print ('user health:', new_user_health )
 		if int(new_user_health) <= 0: 
 			user_dies()		
 			break
