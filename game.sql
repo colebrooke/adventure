@@ -123,6 +123,7 @@ CREATE TABLE "npc" (
 	`npcname`	TEXT NOT NULL,
 	`npcshortdesc`	TEXT,
 	`npclongdesc`	TEXT,
+	`npcdeaddesc`	TEXT,
 	`npcroom`	INTEGER NOT NULL,
 	`npcstartroom`	INTEGER NOT NULL,
 	`npcstrength`	INTEGER,
@@ -132,22 +133,22 @@ CREATE TABLE "npc" (
 INSERT INTO "npc" VALUES(1,'Old Man','There is an old man here.','The old man is wearing rags, and has his head covered by a black hood.  
 He doesn''t look like he''s in the mood for a chat, but you can''t help thinking with the right motivation he
 would have a few interesting stories to tell.
-',4,4,5,100,1);
+','The body of an old man lies here.',4,4,5,30,1);
 INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
 arms sticking out.  It looks pretty dangerous in the wrong hands,
-or with the wrong programming....',7,7,7,100,1);
+or with the wrong programming....','The remains of a repair droid are here.',7,7,7,100,1);
 INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle droid is tall an ungainly.  It looks very old, and is scored with
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-',20,20,9,100,1);
+','The remains of a battle droid are here.',20,20,9,100,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
-and long blond hair. In his ear you can see a stange ear peice which is glowing red.',25,25,8,100,1);
+and long blond hair. In his ear you can see a stange ear peice which is glowing red.','The body of a shop keeper is here',25,25,8,100,1);
 INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
 He is dressed in a white vest, grey cargo trousers,
 and has a tape rapped around one of his hands.
 You also notice a scar along his neck stopping at his collar bone.
- ',0,0,7,100,1);
+ ','The body of Grabvoi lies here.',0,0,7,100,1);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,

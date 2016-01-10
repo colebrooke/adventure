@@ -140,7 +140,10 @@ def print_current_room(userid):
 	print ("")
 
 	# print any NPCs that may be in the room...
-	db_print_rows("select npcshortdesc from npc where npcroom=%s" % current_room, 'yellow' )
+	db_print_rows("select npcshortdesc from npc where npcroom=%s and npcstatus=1" % current_room, 'yellow' )
+	print ("")
+	# print any non-living npcs in the room...
+	db_print_rows("select npcdeaddesc from npc where npcroom=%s and npcstatus=0" % current_room, 'yellow' )
 	print ("")
 	time.sleep(0.3)
 
@@ -468,24 +471,23 @@ def battle ( npc ):
 		# same for npc attack force
 		npc_attack_force = int(random.randint(1,10) * int(npc_strength) / 10 )
 
-		print ("npc attack force", npc_attack_force)
 		
-		time.sleep(3)
+		time.sleep(2)
 
 		# display first attack description, from the user (type=0)
 		battle_action = db('select action1 from battle where type=0 and level=%s' % attack_force )
 		battle_action = ( battle_action.replace ( 'WEAPON', my_weapon ) )
 		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
 		print ( battle_action )
-		time.sleep(3)
+		time.sleep(2)
 		# display attack result...
 		battle_action = db('select action2 from battle where type=0 and level=%s' % attack_force )
 		battle_action = ( battle_action.replace ( 'WEAPON', my_weapon ) )
 		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
 		print ( battle_action )
-		time.sleep(3)
+		time.sleep(2)
 		# inflict damage on oponent...
-		new_npc_health = ( int( npc_health ) - int ( attack_force ) )
+		new_npc_health = ( int( npc_health ) - int ( attack_force * 3 ) )
 		db('update npc set npchealth = %s where npcname like "%s"' % ( new_npc_health, npc ))
 		# for debugging, print npc health...
 		print ('npc health:', npc_health )
@@ -499,16 +501,16 @@ def battle ( npc ):
 		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
 		print ( battle_action )
 
-		time.sleep(3)
+		time.sleep(2)
 		# display attack result...
 		battle_action = db('select action2 from battle where type=10 and level=%s' % int(npc_attack_force) )
 		battle_action = ( battle_action.replace ( 'WEAPON', 'sword' ) )
 		battle_action = ( battle_action.replace ( 'TARGET', npc ) )
 		print ( battle_action )
 
-		time.sleep(3)
+		time.sleep(2)
 		# take damage given by npc...
-		new_user_health = ( int( user_health ) - int ( npc_attack_force ) )
+		new_user_health = ( int( user_health ) - int ( npc_attack_force * 2 ) )
 		db('update user set health = %s where userid = %s' % ( new_user_health, userid ))
 		print("")
 		# for debugging, display user health...
@@ -548,6 +550,7 @@ def user_dies ():
 def npc_dies ( npc ):
 #----------------------------------------------------------------------
 	print ('You have killed the %s!' % npc )
+	db('update npc set npcstatus=0 where "npcname" like "%s"' % npc)
 	time.sleep(3)
 	print_current_room ( userid )
 
