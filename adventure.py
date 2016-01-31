@@ -114,6 +114,17 @@ def scroll(lines):
 		time.sleep(0.1)
 #----------------------------------------------------------------------
 
+def where_am_i(userid):
+#----------------------------------------------------------------------
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	current_room_name = db("select roomname from rooms where roomid=%s" % current_room)
+	print ("Your current location is: %s" % current_room_name )
+	time.sleep(0.3)
+	print ("")
+
+#----------------------------------------------------------------------
+
+
 
 def print_current_room(userid):
 #---------------------------------------------------------
@@ -346,7 +357,7 @@ def help ():
 		
 	Other commands include:-
 		
-	Look around, look at, examine, where am I, take, drop, activate, use, 
+	Look, look at, examine, where am I, take, drop, activate, use, 
 	get, restart, score, quit, sleep, talk to, speak to, hit, kill,
 	attack, save, load.
 
@@ -518,7 +529,9 @@ def battle ( npc ):
 		if int(new_user_health) <= 0: 
 			user_dies()		
 			break
-
+		if int(new_user_health) <= 20:
+			print ("Your health is critically low!")
+			print ("")
 		print ('Do you want to continue the battle?')
 		print ("""1.  Continue the battle! 2.  Admit defeat and run away!""")
 
@@ -662,6 +675,9 @@ while loop == 1 :
 
 	# Look
 	elif (userinput == "look"): look ()	
+
+	# Where am I
+	elif (userinput == "where am i"): where_am_i (userid)
 
 	# Talk
 	elif 	re.match ( r'^talk to', userinput ) or \
