@@ -74,7 +74,7 @@ To the right of you is a large vision screen, showing what appears to be a race 
 You notice the air is full of a light mist, which seams to be coming from the glasses in peoples hands!
 
 A notice says "Try our new Delmarbeer for the ultimate high!"','Cantina Albar');
-INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are buzy playing a
+INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are busy playing a
 mysterious card game. You can just about make out the wording on the
 cards: -Ziplac-','Cantina Side Room');
 INSERT INTO "rooms" VALUES(15,'You''re on a narrow path leading between piles of junk in the lower city.
