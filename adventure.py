@@ -42,8 +42,6 @@ def db_print_rows(sqlstring, colour='none'):
 	with conection:
 		cursor = conection.cursor()
 		cursor.execute("%s" % sqlstring)
-		#rows = cursor.fetchall()
-		#return ("%s" % (rows))
 		for row in cursor:
 			if colour == 'none': print ("%s" % (row))
 			if colour == 'yellow': print ('\033[1;33m%s\033[1;m' % (row))
@@ -58,16 +56,9 @@ def db_print_rows_numbered(sqlstring):
 	with conection:
 		cursor = conection.cursor()
 		cursor.execute("%s" % sqlstring)
-		#rows = cursor.fetchall()
-		#return ("%s" % (rows))
 		a = 1
 		for row in cursor:
-			#print ("%s:" % (a))
-			#a = a + 1
-			#print ("%s" % (=row))
-			#output = row[0]
 			print ( "   ", row[0], " ", row[1])
-			#print (row[1])
 		cursor.close()
 #---------------------------------------------------------
 
@@ -89,7 +80,6 @@ def db_query(sqlstring):
 		cursor = conection.cursor()
 		cursor.execute("%s" % sqlstring)
 		rows = cursor.fetchall()
-		#return rows
 		cursor.close()
 
 	# First need to convert each tuple in the list to a list within a list:
@@ -384,6 +374,7 @@ def talk ():
 		# set the npcid we are talking to...
 		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
 		# print the possible questions...
+		print ("    0   End your conversation with the %s." % npc_to_talk_to )
 		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a \
 					where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
 		print ("")
@@ -394,11 +385,14 @@ def talk ():
 			except ValueError:
 				print("You must choose a number corrisponding to the choice above.")
 			break
-		answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
+		if selected_question == 0:
+			print ("You finish your conversation.")
+		else:
+			answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
 				and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
-		print ("")
-		db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
-		print ("")
+			print ("")
+			db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
+			print ("")
 
 	else:
 		print ("You can't do that.")
