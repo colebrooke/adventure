@@ -225,12 +225,15 @@ def examine ():
 #		print ("")
 #		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
 	elif thing_to_examine in available_npcs:
+		npc_alive = db("select npcstatus from npc where lower(npcname)='%s'" % thing_to_examine)
 		print ("")
 		print ("You examine the %s..." % thing_to_examine )
 		time.sleep(1.3)
 		print ("")
-		db_print_rows("select npclongdesc from npc where lower(npcname)='%s'" % thing_to_examine)
-	
+		if npc_alive == 1:
+			db_print_rows("select npclongdesc from npc where lower(npcname)='%s'" % thing_to_examine)
+		else:
+			db_print_rows("select npcdeaddesc from npc where lower(npcname)='%s'" % thing_to_examine)
 	else:
 		print ("You can't do that.")
 
@@ -358,7 +361,8 @@ def help ():
 def talk ():
 #-------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ))
-	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
+	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s \
+                                    and npcstatus = 1" % current_room )
 
 	# strip the action term from the user input to leave the npc you're talking to...
 	if re.match (r'talk to', userinput ):
@@ -373,6 +377,7 @@ def talk ():
 		print ("")
 		# set the npcid we are talking to...
 		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
+                
 		# print the possible questions...
 		print ("    0   End your conversation with the %s." % npc_to_talk_to )
 		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a \
@@ -560,6 +565,7 @@ def user_dies ():
 def npc_dies ( npc ):
 #----------------------------------------------------------------------
 	print ('You have killed the %s!' % npc )
+        # note: npcstatus 1=alive 0=dead
 	db('update npc set npcstatus=0 where "npcname" like "%s"' % npc)
 	time.sleep(3)
 	print_current_room ( userid )
