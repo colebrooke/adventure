@@ -384,15 +384,18 @@ def talk ():
 				selected_question = int(selection)
 			except ValueError:
 				print("You must choose a number corrisponding to the choice above.")
-			break
-		if selected_question == 0:
-			print ("You finish your conversation.")
-		else:
-			answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
+			#break
+			if selected_question == 0:
+				print ("You finish your conversation.")
+				break
+			else:
+				answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
 				and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
-			print ("")
-			db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
-			print ("")
+				print ("")
+				db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
+				print ("")
+				print ("Is there anything else you want to say to the %s? (Select 0 to finish your conversation)" % npc_to_talk_to )
+				print ("")
 
 	else:
 		print ("You can't do that.")
