@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+#
+# "Adventure Game"
+#
+# This is a text based science fiction themed adventure game, written in Python 3.
+# The database back end is created in SQLite3.
+#
+# Main authors Justin Miller and Jensen Miller.
+# Contributions welcome.
+#
+# Github page: https://github.com/colebrooke/adventure
+#
+# For setup instructions, see README.md
+#
 
 debug = 0 
 
