@@ -216,6 +216,10 @@ def examine ():
 	available_items = db_query("select lower(itemname) from item where currentroom=%s" % current_room )
 #	available_objects = db_query("select lower(objectname) from object where roomid=%s" % current_room )
 	available_npcs = db_query("select lower(npcname) from npc where npcroom =%s" % current_room )
+	available_inventory = (	"select lower(itemname) from user as U join \
+                        	inventory as I on U.userid=I.userid join \
+                        	item as D on I.itemid=D.itemid \
+                        	where I.userid=%s" % ( userid )) 
 
 	# strip the action term from the user input to leave the item your examining.
 	if re.match (r'look at', userinput ):
@@ -231,12 +235,12 @@ def examine ():
 		db_print_rows("select itemdesc from item where lower(itemname)='%s'" % thing_to_examine)
 		print ("")
 		time.sleep(0.8)
-#	elif thing_to_examine in available_objects:
-#		print ("")
-#		print ("You examine the %s..." % thing_to_examine )
-#		time.sleep(1.3)
-#		print ("")
-#		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
+	elif thing_to_examine in available_inventory:
+		print ("")
+		print ("You examine the %s..." % thing_to_examine )
+		time.sleep(1.3)
+		print ("")
+		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
 	elif thing_to_examine in available_npcs:
 		npc_alive = db("select npcstatus from npc where lower(npcname)='%s'" % thing_to_examine)
 		print ("")

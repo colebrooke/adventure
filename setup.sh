@@ -6,6 +6,9 @@ if [ -a './game.db' ];
 	if [[ $REPLY =~ ^[Yy]$ ]];
 	then
 		rm ./game.db
+	else
+		echo "Exiting with no changes."
+		exit 0
 	fi
 fi
 echo "Creating new database file with sqlite3...."
