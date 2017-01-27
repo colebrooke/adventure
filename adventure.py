@@ -242,15 +242,20 @@ def examine ():
 		print ("")
 		db_print_rows("select objectdesc from object where lower(objectname)='%s'" % thing_to_examine)
 	elif thing_to_examine in available_npcs:
+		npc_id = db("select npcid from npc where lower(npcname)='%s'" % thing_to_examine)
 		npc_alive = db("select npcstatus from npc where lower(npcname)='%s'" % thing_to_examine)
 		print ("")
 		print ("You examine the %s..." % thing_to_examine )
 		time.sleep(1.3)
 		print ("")
-		if npc_alive == 1:
+		if int(npc_alive) == 1:
 			db_print_rows("select npclongdesc from npc where lower(npcname)='%s'" % thing_to_examine)
 		else:
 			db_print_rows("select npcdeaddesc from npc where lower(npcname)='%s'" % thing_to_examine)
+			print ("The %s is carrying the following items:" % thing_to_examine)
+			db_print_rows( "select lower(itemname) from npc as U join npc_inventory as I on U.npcid=I.npcid join \
+					item as D on I.itemid=D.itemid \
+					where I.npcid=%s" % ( npc_id ))
 	else:
 		print ("You can't do that.")
 
