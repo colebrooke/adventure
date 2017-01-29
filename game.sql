@@ -28,6 +28,10 @@ INSERT INTO "q_and_a" VALUES(11,4,'Can I see what you have for sale?',2,0,1,12,N
 INSERT INTO "q_and_a" VALUES(12,4,'The shop keeper says "Of course, please take a look at my goods...."',NULL,1,1,NULL,1);
 INSERT INTO "q_and_a" VALUES(13,1,'How long have you been on this planet?',4,0,1,14,NULL);
 INSERT INTO "q_and_a" VALUES(14,1,'The old man says "I''ve been on this planet about 6 years.  I was forced to leave planet Anmar by the Tabuchi tribe, who kill inocent people."',NULL,1,1,NULL,NULL);
+INSERT INTO "q_and_a" VALUES(15,3,'What kind of droid are you?',1,0,1,16,NULL);
+INSERT INTO "q_and_a" VALUES(16,3,'The battle droid buzzes and clicks, it sounds like it''s trying to warn you it''s a battle droid.',NULL,1,1,NULL,NULL);
+INSERT INTO "q_and_a" VALUES(17,3,'Do you know anything about Delmar?',2,0,1,18,NULL);
+INSERT INTO "q_and_a" VALUES(18,3,'The battle droid shreeks in apparent anger!',NULL,1,1,NULL,3);
 CREATE TABLE "rooms" (
 	`roomid`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`roomdesc`	TEXT,
@@ -141,7 +145,7 @@ INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle 
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-','The remains of a battle droid are here.',20,20,9,100,1);
+','The remains of a battle droid are here.',20,20,9,150,0);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
 and long blond hair. In his ear you can see a stange ear peice which is glowing red.','The body of a shop keeper is here',25,25,8,100,1);
 INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
@@ -302,7 +306,7 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',147);
+INSERT INTO "user" VALUES(1,'Justin',0,20,46,10,'',180);
 INSERT INTO "user" VALUES(2,'Jensen',1,10,100,10,'',270);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
@@ -361,9 +365,9 @@ INSERT INTO "battle" VALUES(12,10,4,'The TARGET dances from side to side, then s
 INSERT INTO "battle" VALUES(13,0,5,'You take a deep breath and drive your WEAPON straight into the TARGET...','The TARGET staggers back, obviously hurt by your assult.');
 INSERT INTO "battle" VALUES(14,10,5,'The TARGET swings his WEAPON and belts you with all his force!','You step to one side, but the blow still catches you!');
 INSERT INTO "battle" VALUES(15,0,6,'You step back, but as your oponent advances, you swipe your WEAPON and hit him hard...','The TARGET stumbles, hurt by your attack.');
-INSERT INTO "battle" VALUES(16,10,6,'The TARGET stikes without warning!','You were not expecting that! And it hurt!');
-INSERT INTO "battle" VALUES(17,0,7,'Your eyes glint as you swing your WEAPON and stike...','Your WEAPON connects with a powerful thud and injures the TARGET!');
-INSERT INTO "battle" VALUES(18,10,7,'The TARGET steps forward and lashes out agressively!','You are hit in the head, and nearly fall!');
+INSERT INTO "battle" VALUES(16,10,6,'The TARGET strikes without warning!','You were not expecting that! And it hurt!');
+INSERT INTO "battle" VALUES(17,0,7,'Your eyes glint as you swing your WEAPON and strike...','Your WEAPON connects with a powerful thud and injures the TARGET!');
+INSERT INTO "battle" VALUES(18,10,7,'The TARGET moves forward and lashes out agressively!','You are hit in the head, and nearly fall!');
 INSERT INTO "battle" VALUES(19,0,8,'Somehow you find the strength to smash home a devistating blow!','The TARGET is hit in the body and falls back!');
 INSERT INTO "battle" VALUES(20,10,8,'The TARGET spins his WEAPON and masterfully smashes you!','You stagger backwards in pain!');
 INSERT INTO "battle" VALUES(21,0,9,'You raise your WEAPON and deliver a powerful blow!','You manage to hit your TARGET in the head!');
@@ -374,7 +378,7 @@ CREATE TABLE `user_battle` (
 );
 INSERT INTO "user_battle" VALUES(1,1);
 DELETE FROM sqlite_sequence;
-INSERT INTO "sqlite_sequence" VALUES('q_and_a',14);
+INSERT INTO "sqlite_sequence" VALUES('q_and_a',18);
 INSERT INTO "sqlite_sequence" VALUES('rooms',31);
 INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',19);

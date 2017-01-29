@@ -393,19 +393,23 @@ def talk ():
 		npc_to_talk_to = userinput.replace('speak to ', '')
 
 	if npc_to_talk_to in available_npcs:
+		ongoing_conversation = 1
 		print ("")
 		print ("What do you want to say to the %s?" % npc_to_talk_to )
 		time.sleep(1.3)
 		print ("")
 		# set the npcid we are talking to...
 		npcid_to_talk_to = db("select npcid from npc where npcname = '%s' collate nocase" % ( npc_to_talk_to ))
-                
+		npc_alive = db("select npcstatus from npc where lower(npcname)='%s' collate nocase" % npc_to_talk_to )
+		if int(npc_alive) == 0:
+			print("The %s is dead!" % npc_to_talk_to )
+			return 
 		# print the possible questions...
 		print ("    0   End your conversation with the %s." % npc_to_talk_to )
 		db_print_rows_numbered("select q_and_a_number, q_and_a_text from q_and_a \
 					where q_and_a_npcid='%s' and q_and_a_type = 0" % npcid_to_talk_to)
 		print ("")
-		while True: 
+		while ongoing_conversation == 1: 
 			selection=input("Please Select an option: ")
 			try:
 				selected_question = int(selection)
@@ -419,10 +423,28 @@ def talk ():
 				answer = db(	"select q_and_a_link from q_and_a where q_and_a_npcid='%s' \
 				and q_and_a_type = 0 and q_and_a_number='%s'" % (npcid_to_talk_to, selected_question))
 				print ("")
+				# print answer
 				db_print_rows("select q_and_a_text from q_and_a where q_and_a_id='%s'" % answer )
-				print ("")
-				print ("Is there anything else you want to say to the %s? (Select 0 to finish your conversation)" % npc_to_talk_to )
-				print ("")
+				# decide if this answer has a triggered action
+				trigger_action = db( "select q_and_a_trigger from q_and_a where q_and_a_id='%s'" % answer )
+				# possible trigger actions:
+				# 1 - show inventory of npc for sale
+				# 2 - npc gives an item to the player				
+				# 3 - npc attacks the player
+				if str(trigger_action) == "1":
+					print ("The %s is selling the following items:" % npc_to_talk_to )
+					db_print_rows( "select lower(itemname) from npc as U join npc_inventory as \
+							I on U.npcid=I.npcid join item as D on I.itemid=D.itemid where \
+							I.npcid=%s" % ( npcid_to_talk_to ))	
+					#TODO: trigger ability to buy items from the npc
+				if str(trigger_action) == "3":
+					print ("The %s attacks you!" % npc_to_talk_to )
+					ongoing_conversation = 0
+					battle ( npc_to_talk_to )
+				if ongoing_conversation == 1:
+					print ("")
+					print ("Is there anything else you want to say to the %s? (Select 0 to finish your conversation)" % npc_to_talk_to )
+					print ("")
 
 	else:
 		print ("You can't do that.")
