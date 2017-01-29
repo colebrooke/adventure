@@ -74,7 +74,7 @@ To the right of you is a large vision screen, showing what appears to be a race 
 You notice the air is full of a light mist, which seams to be coming from the glasses in peoples hands!
 
 A notice says "Try our new Delmarbeer for the ultimate high!"','Cantina Albar');
-INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are busy playing a
+INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are buzy playing a
 mysterious card game. You can just about make out the wording on the
 cards: -Ziplac-','Cantina Side Room');
 INSERT INTO "rooms" VALUES(15,'You''re on a narrow path leading between piles of junk in the lower city.
@@ -163,7 +163,7 @@ INSERT INTO "item" VALUES(1,'hammer','The hammer looks like a relic from a bygon
 like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0);
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
 like it would be worth a small fortune.',1,2,12,'You notice a diamond had been dropped here!',0);
-INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,4,'A keycard has been discarded here.',0);
+INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,3,'A keycard has been discarded here.',0);
 INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title lable that says "Spintel".  On the other side is a laser proof glass, 
 with wires behind it and a big circle in the middle, you notice on the side of the circle 
 is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0);
@@ -172,7 +172,7 @@ INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the 
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
 it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
-',1,1,4,'There is a blaster pistol here.',0);
+',1,1,7,'There is a blaster pistol here.',0);
 INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
 INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
 It says ''Come to the droid shop for the best deals
@@ -185,8 +185,12 @@ which says ''All is red, all is white''.',1,20,20,'A rock tower has been constru
 INSERT INTO "item" VALUES(12,'alien meat','The alien meat is grey and slimy.  The thought of eating it is disgusting to you.',1,0,0,'The is some alien meat.',0);
 INSERT INTO "item" VALUES(13,'alien cookies','The alien cookies are grey and covered in silver insects. You suspect they are probably leathal to humans.',1,0,0,'There are some alien cookies here.',0);
 INSERT INTO "item" VALUES(14,'baked skima','The baked skima looks like a tasty dish. For alien spiders.',1,0,0,'Some baked skima is here.',0);
-INSERT INTO "item" VALUES(15,'gas mask',NULL,1,0,0,'You see a gas mask here',0);
-INSERT INTO "item" VALUES(16,'',NULL,'',NULL,NULL,NULL,0);
+INSERT INTO "item" VALUES(15,'gas mask','The gas mask is black in colour, and has attachments for breathing hoses, which are missing.',1,0,0,'You see a gas mask here.',0);
+INSERT INTO "item" VALUES(16,'wen token','The wen token is a small black square, used for unlocking wen devices.',1,0,0,'You see a wen token here.',0);
+INSERT INTO "item" VALUES(17,'rime cutter','The rime cutter is a tiny rusty blade with a jagged edge, used for pealing alien fruit.',1,0,0,'There is a rime cutter here.',0);
+INSERT INTO "item" VALUES(18,'blanket','The blanket is compact and warm.  It should protect it''s user from the harshest cold.',1,0,0,'A blanket has been discarded here.',0);
+INSERT INTO "item" VALUES(19,'vep key','The vep key is a short white object with strange markings on one side.
+It could be used to open a weapons locker, or another secure storage.',1,0,0,'A vep key is here.',0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -247,6 +251,7 @@ INSERT INTO "route" VALUES(34,24,25,'n','The door of the shop is north of you.')
 INSERT INTO "route" VALUES(35,25,24,'s','The exit of the shop is south of you.');
 INSERT INTO "route" VALUES(36,21,8,'w','In the west there is a bridge across the city.');
 INSERT INTO "route" VALUES(37,26,15,'s','To the south there is a narrow path.');
+INSERT INTO "route" VALUES(38,15,26,'n','Looking to the north there is a dark path.');
 INSERT INTO "route" VALUES(39,10,27,'e','To the east, you can see a small dwelling.');
 INSERT INTO "route" VALUES(40,27,10,'w','In the west, you can see an archway.');
 INSERT INTO "route" VALUES(41,13,29,'e','In the east there is a wider path.');
@@ -269,10 +274,14 @@ INSERT INTO "inventory" VALUES(7,2,2);
 INSERT INTO "inventory" VALUES(9,4,3);
 INSERT INTO "inventory" VALUES(12,2,1);
 INSERT INTO "inventory" VALUES(13,2,3);
+INSERT INTO "inventory" VALUES(16,1,3);
+INSERT INTO "inventory" VALUES(18,1,8);
 INSERT INTO "inventory" VALUES(20,2,8);
 INSERT INTO "inventory" VALUES(21,8,1);
-INSERT INTO "inventory" VALUES(22,1,3);
-INSERT INTO "inventory" VALUES(23,1,8);
+INSERT INTO "inventory" VALUES(22,9,1);
+INSERT INTO "inventory" VALUES(23,9,3);
+INSERT INTO "inventory" VALUES(24,9,4);
+INSERT INTO "inventory" VALUES(25,9,8);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -293,12 +302,13 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,1,100,10,'',152);
-INSERT INTO "user" VALUES(2,'Jensen',1,31,100,10,'',231);
+INSERT INTO "user" VALUES(1,'Justin',0,4,100,10,'',147);
+INSERT INTO "user" VALUES(2,'Jensen',1,10,100,10,'',270);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
 INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
+INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -363,17 +373,16 @@ CREATE TABLE `user_battle` (
 	`npcid`	INTEGER
 );
 INSERT INTO "user_battle" VALUES(1,1);
-INSERT INTO "user_battle" VALUES(1,1);
 DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',14);
 INSERT INTO "sqlite_sequence" VALUES('rooms',31);
 INSERT INTO "sqlite_sequence" VALUES('npc',5);
-INSERT INTO "sqlite_sequence" VALUES('item',16);
+INSERT INTO "sqlite_sequence" VALUES('item',19);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
-INSERT INTO "sqlite_sequence" VALUES('inventory',23);
+INSERT INTO "sqlite_sequence" VALUES('inventory',25);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
-INSERT INTO "sqlite_sequence" VALUES('user',8);
+INSERT INTO "sqlite_sequence" VALUES('user',9);
 INSERT INTO "sqlite_sequence" VALUES('battle',23);
 CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
