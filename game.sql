@@ -172,7 +172,8 @@ INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a titl
 On the other side is a laser proof glass, with wires behind it,
 and a big circle in the middle. You notice on the side of the circle 
 is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0);
-INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
+INSERT INTO "item" VALUES(5,'trophy cabinet','The cabinet is unremarkable. It looks like it used to contain quite a few trophies,
+though there is still one lone trophy which stands still in the middle of the cabinet.  ',1,1,1,'There is a trophy cabinet here.',1);
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
@@ -316,7 +317,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,6,100,10,'',5);
+INSERT INTO "user" VALUES(10,'pilot_1',0,1,100,10,'',6);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
