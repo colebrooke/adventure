@@ -168,8 +168,9 @@ like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
 like it would be worth a small fortune.',1,2,12,'You notice a diamond had been dropped here!',0);
 INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,3,'A keycard has been discarded here.',0);
-INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title lable that says "Spintel".  On the other side is a laser proof glass, 
-with wires behind it and a big circle in the middle, you notice on the side of the circle 
+INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title lable that says "Spintel".
+On the other side is a laser proof glass, with wires behind it,
+and a big circle in the middle. You notice on the side of the circle 
 is small writing saying B213T.',1,6,6,'A hard drive lies here gathering dust.',0);
 INSERT INTO "item" VALUES(5,'trophy cabinet','The cabiniet is unremarkable. It looks like it used to contain quite a few trophies.',1,1,1,'There is a trophy cabinet here.',1);
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
@@ -286,6 +287,8 @@ INSERT INTO "inventory" VALUES(22,9,1);
 INSERT INTO "inventory" VALUES(23,9,3);
 INSERT INTO "inventory" VALUES(24,9,4);
 INSERT INTO "inventory" VALUES(25,9,8);
+INSERT INTO "inventory" VALUES(26,10,1);
+INSERT INTO "inventory" VALUES(27,10,3);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -313,6 +316,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
+INSERT INTO "user" VALUES(10,'pilot_1',0,6,100,10,'',5);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -384,9 +388,9 @@ INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',19);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
-INSERT INTO "sqlite_sequence" VALUES('inventory',25);
+INSERT INTO "sqlite_sequence" VALUES('inventory',27);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
-INSERT INTO "sqlite_sequence" VALUES('user',9);
+INSERT INTO "sqlite_sequence" VALUES('user',10);
 INSERT INTO "sqlite_sequence" VALUES('battle',23);
 CREATE VIEW 'weapons' as select item.itemname, weapon.power, weapon.accuracy from item join weapon on item.itemid=weapon.weaponid;
 COMMIT;
