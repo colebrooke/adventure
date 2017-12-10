@@ -706,7 +706,7 @@ while loop == 1 :
 	elif (userinput == "se") or (userinput == "south east"): direction = "se"; move ( direction, userid )
 
 	# Inventory
-	elif (userinput == "i") or (userinput == "inventory"): inventory ()
+	elif (userinput == "i") or (userinput =="inv") or (userinput == "inventory"): inventory ()
 
 	# Take / Pick up
 	elif 	re.match ( r'^take', userinput ) or \
