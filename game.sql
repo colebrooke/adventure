@@ -146,7 +146,7 @@ INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle 
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-','The remains of a battle droid are here.',20,20,9,126,1);
+','The remains of a battle droid are here.',20,20,9,100,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
 and long blond hair. In his ear you can see a stange ear peice which is glowing red.','The body of a shop keeper is here',25,25,8,100,1);
 INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
@@ -179,7 +179,7 @@ INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the 
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
 it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
-',1,1,7,'There is a blaster pistol here.',0);
+',1,26,26,'There is a blaster pistol here.',0);
 INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
 INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
 It says ''Come to the droid shop for the best deals
@@ -280,22 +280,6 @@ CREATE TABLE "inventory" (
 	`userid`	INTEGER NOT NULL,
 	`itemid`	INTEGER NOT NULL
 );
-INSERT INTO "inventory" VALUES(7,2,2);
-INSERT INTO "inventory" VALUES(9,4,3);
-INSERT INTO "inventory" VALUES(12,2,1);
-INSERT INTO "inventory" VALUES(13,2,3);
-INSERT INTO "inventory" VALUES(16,1,3);
-INSERT INTO "inventory" VALUES(18,1,8);
-INSERT INTO "inventory" VALUES(20,2,8);
-INSERT INTO "inventory" VALUES(21,8,1);
-INSERT INTO "inventory" VALUES(22,9,1);
-INSERT INTO "inventory" VALUES(23,9,3);
-INSERT INTO "inventory" VALUES(24,9,4);
-INSERT INTO "inventory" VALUES(25,9,8);
-INSERT INTO "inventory" VALUES(26,10,1);
-INSERT INTO "inventory" VALUES(27,10,3);
-INSERT INTO "inventory" VALUES(28,10,8);
-INSERT INTO "inventory" VALUES(29,10,2);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
