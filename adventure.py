@@ -615,6 +615,21 @@ def npc_dies ( npc ):
 	print_current_room ( userid )
 
 
+def reset_game ():
+#----------------------------------------------------------------------
+	# reset npc locations
+	db('update npc set npcroom = npcstartroom')
+	# reset npc health
+	db('update npc set npchealth = 100')
+	# reset npc status to alive
+	db('update npc set npcstatus = 1')
+
+	# reset item locations
+	db('update item set currentroom = defaultroom')	
+
+	# reset user inventory
+	db('delete from inventory where userid = %s' % userid )
+
 
 def look ():
 #----------------------------------------------------------------------
@@ -630,7 +645,7 @@ print ("----------------------------------------")
 print ("""
    1  Log in an exsiting adventurer
    2  Create a new adventurer
-   3  See who is online
+   3  Reset game to default state
    4  Exit
 """)
 while True: 
@@ -657,7 +672,8 @@ while True:
 			print("Created a new user.  You can now log in.")
 	
 	elif selection == '3':
-		print ("Feature not available yet!")
+		reset_game()
+		print ("The game has been reset, along with your user.")
 	elif selection == '4': 
 		print ("Thanks for playing!")
 		print ("")

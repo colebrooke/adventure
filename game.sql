@@ -138,7 +138,7 @@ INSERT INTO "npc" VALUES(1,'Old Man','There is an old man here.','The old man is
 He doesn''t look like he''s in the mood for a chat, 
 but you can''t help thinking with the right motivation he would
 have a few interesting stories to tell.
-','The body of an old man lies here.',4,4,5,0,0);
+','The body of an old man lies here.',4,4,5,100,1);
 INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
 arms sticking out.  It looks pretty dangerous in the wrong hands,
 or with the wrong programming....','The remains of a repair droid are here.',7,7,7,100,1);
@@ -146,7 +146,7 @@ INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle 
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-','The remains of a battle droid are here.',20,20,9,150,0);
+','The remains of a battle droid are here.',20,20,9,126,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
 and long blond hair. In his ear you can see a stange ear peice which is glowing red.','The body of a shop keeper is here',25,25,8,100,1);
 INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
@@ -165,9 +165,9 @@ CREATE TABLE "item" (
 	`static`	INTEGER DEFAULT (0)
 );
 INSERT INTO "item" VALUES(1,'hammer','The hammer looks like a relic from a bygone era. It''s of a heavy steel contruction and looks 
-like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0);
+like it could be used as a weapon in a pinch.',1,3,3,'There is a hammer here.',0);
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
-like it would be worth a small fortune.',1,2,12,'You notice a diamond had been dropped here!',0);
+like it would be worth a small fortune.',1,12,12,'You notice a diamond had been dropped here!',0);
 INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,9,9,'A keycard has been discarded here.',0);
 INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title lable that says "Spintel".
 On the other side is a laser proof glass, with wires behind it,
@@ -262,7 +262,6 @@ INSERT INTO "route" VALUES(34,24,25,'n','The door of the shop is north of you.')
 INSERT INTO "route" VALUES(35,25,24,'s','The exit of the shop is south of you.');
 INSERT INTO "route" VALUES(36,21,8,'w','In the west there is a bridge across the city.');
 INSERT INTO "route" VALUES(37,26,15,'s','To the south there is a narrow path.');
-INSERT INTO "route" VALUES(38,15,26,'n','Looking to the north there is a dark path.');
 INSERT INTO "route" VALUES(39,10,27,'e','To the east, you can see a small dwelling.');
 INSERT INTO "route" VALUES(40,27,10,'w','In the west, you can see an archway.');
 INSERT INTO "route" VALUES(41,13,29,'e','In the east there is a wider path.');
@@ -295,6 +294,8 @@ INSERT INTO "inventory" VALUES(24,9,4);
 INSERT INTO "inventory" VALUES(25,9,8);
 INSERT INTO "inventory" VALUES(26,10,1);
 INSERT INTO "inventory" VALUES(27,10,3);
+INSERT INTO "inventory" VALUES(28,10,8);
+INSERT INTO "inventory" VALUES(29,10,2);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -315,14 +316,14 @@ CREATE TABLE "user" (
 	`userdesc`	TEXT,
 	`moves`	INTEGER NOT NULL DEFAULT (1)
 );
-INSERT INTO "user" VALUES(1,'Justin',0,20,46,10,'',180);
-INSERT INTO "user" VALUES(2,'Jensen',1,10,100,10,'',270);
+INSERT INTO "user" VALUES(1,'Justin',0,1,46,10,'',180);
+INSERT INTO "user" VALUES(2,'Jensen',1,1,100,10,'',270);
 INSERT INTO "user" VALUES(3,'Ellie',0,1,100,10,'',11);
-INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
-INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
-INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
-INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,2,94,10,'',9);
+INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
+INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
+INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
+INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
+INSERT INTO "user" VALUES(10,'pilot_1',0,1,100,10,'',52);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -394,7 +395,7 @@ INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',20);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
-INSERT INTO "sqlite_sequence" VALUES('inventory',27);
+INSERT INTO "sqlite_sequence" VALUES('inventory',29);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',10);
 INSERT INTO "sqlite_sequence" VALUES('battle',23);
