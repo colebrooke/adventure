@@ -721,7 +721,7 @@ while loop == 1 :
 	elif re.match ( r'^examine', userinput ) or re.match ( r'^look at', userinput ): examine ()
 
 	# Look
-	elif (userinput == "look"): look ()	
+	elif (userinput == "look") or (userinput == "l"): look ()	
 
 	# Where am I
 	elif (userinput == "where am i"): where_am_i (userid)
