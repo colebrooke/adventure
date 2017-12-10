@@ -198,6 +198,10 @@ INSERT INTO "item" VALUES(17,'rime cutter','The rime cutter is a tiny rusty blad
 INSERT INTO "item" VALUES(18,'blanket','The blanket is compact and warm.  It should protect it''s user from the harshest cold.',1,0,0,'A blanket has been discarded here.',0);
 INSERT INTO "item" VALUES(19,'vep key','The vep key is a short white object with strange markings on one side.
 It could be used to open a weapons locker, or another secure storage.',1,0,0,'A vep key is here.',0);
+INSERT INTO "item" VALUES(20,'trophy','The trophy is dull, dusty and diminutive.
+It has a circular base with a miscellaneous rifle part delicately welded vertically on top.
+A few words are engraved on the base but you can only make out the last five letters.
+KELTH.',1,0,0,'A trophy is here',0);
 CREATE TABLE "object" (
 	`objectid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`objectdesc`	TEXT,
@@ -318,7 +322,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,4,94,10,'',8);
+INSERT INTO "user" VALUES(10,'pilot_1',0,2,94,10,'',9);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -387,7 +391,7 @@ DELETE FROM sqlite_sequence;
 INSERT INTO "sqlite_sequence" VALUES('q_and_a',18);
 INSERT INTO "sqlite_sequence" VALUES('rooms',31);
 INSERT INTO "sqlite_sequence" VALUES('npc',5);
-INSERT INTO "sqlite_sequence" VALUES('item',19);
+INSERT INTO "sqlite_sequence" VALUES('item',20);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
 INSERT INTO "sqlite_sequence" VALUES('inventory',27);
