@@ -135,9 +135,10 @@ CREATE TABLE "npc" (
 	`npcstatus`	INTEGER
 );
 INSERT INTO "npc" VALUES(1,'Old Man','There is an old man here.','The old man is wearing rags, and has his head covered by a black hood.  
-He doesn''t look like he''s in the mood for a chat, but you can''t help thinking with the right motivation he
-would have a few interesting stories to tell.
-','The body of an old man lies here.',4,4,5,30,1);
+He doesn''t look like he''s in the mood for a chat, 
+but you can''t help thinking with the right motivation he would
+have a few interesting stories to tell.
+','The body of an old man lies here.',4,4,5,0,0);
 INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
 arms sticking out.  It looks pretty dangerous in the wrong hands,
 or with the wrong programming....','The remains of a repair droid are here.',7,7,7,100,1);
@@ -167,7 +168,7 @@ INSERT INTO "item" VALUES(1,'hammer','The hammer looks like a relic from a bygon
 like it could be used as a weapon in a pinch.',1,1,3,'There is a hammer here.',0);
 INSERT INTO "item" VALUES(2,'diamond','The diamond is the size of a pea and gleams brightly. It has many facets, and looks 
 like it would be worth a small fortune.',1,2,12,'You notice a diamond had been dropped here!',0);
-INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,3,3,'A keycard has been discarded here.',0);
+INSERT INTO "item" VALUES(3,'keycard','You look closly at the keycard, it is small and grey. You can just make out the words LOWER CITY.',1,9,9,'A keycard has been discarded here.',0);
 INSERT INTO "item" VALUES(4,'hard drive','The hard drive is black and has a title lable that says "Spintel".
 On the other side is a laser proof glass, with wires behind it,
 and a big circle in the middle. You notice on the side of the circle 
@@ -317,7 +318,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,2,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,7,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,25,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,14,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,1,100,10,'',6);
+INSERT INTO "user" VALUES(10,'pilot_1',0,4,94,10,'',8);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
