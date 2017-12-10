@@ -706,7 +706,7 @@ while loop == 1 :
 	elif (userinput == "se") or (userinput == "south east"): direction = "se"; move ( direction, userid )
 
 	# Inventory
-	elif (userinput == "i") or (userinput == "inventory"): inventory ()
+	elif (userinput == "i") or (userinput =="inv") or (userinput == "inventory"): inventory ()
 
 	# Take / Pick up
 	elif 	re.match ( r'^take', userinput ) or \
@@ -721,7 +721,7 @@ while loop == 1 :
 	elif re.match ( r'^examine', userinput ) or re.match ( r'^look at', userinput ): examine ()
 
 	# Look
-	elif (userinput == "look"): look ()	
+	elif (userinput == "look") or (userinput == "l"): look ()	
 
 	# Where am I
 	elif (userinput == "where am i"): where_am_i (userid)
