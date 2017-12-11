@@ -54,7 +54,7 @@ It''s very dusty and smells of old computers, which you can see several of lying
 A tent is here, which brings back fond memories of days camping.  
 You remember the tent was owned by your Great Great grandfather.
 ','Loft');
-INSERT INTO "rooms" VALUES(7,'You find yourself in the upper city south.  There is a statue of two hands 
+INSERT INTO "rooms" VALUES(7,'You find yourself in the upper city south. There is a statue of two hands 
 floating in the air shaking hands It has a cube underneath it says
 -Statue of Respect.-','Upper City South');
 INSERT INTO "rooms" VALUES(8,'You are on a bridge across part of the city.  People walk back and forth across.
@@ -139,8 +139,8 @@ He doesn''t look like he''s in the mood for a chat,
 but you can''t help thinking with the right motivation he would
 have a few interesting stories to tell.
 ','The body of an old man lies here.',4,4,5,100,1);
-INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
-arms sticking out.  It looks pretty dangerous in the wrong hands,
+INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is an ugly looking utalitarian device, with various
+arms sticking out. It looks pretty dangerous in the wrong hands,
 or with the wrong programming....','The remains of a repair droid are here.',7,7,7,100,1);
 INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle droid is tall an ungainly.  It looks very old, and is scored with
 black marks, which you presume are scars from laser blasts.
@@ -178,7 +178,8 @@ though there is still one lone trophy which stands still in the middle of the ca
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
-it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
+it seems to be some sort of custom pistol,
+made by only the best weapon maker in the galaxy, Lowo Gora.
 ',1,26,26,'There is a blaster pistol here.',0);
 INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
 INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
@@ -307,7 +308,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,1,100,10,'',52);
+INSERT INTO "user" VALUES(10,'pilot_1',0,26,100,10,'',59);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
