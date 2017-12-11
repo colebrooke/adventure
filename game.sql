@@ -122,7 +122,8 @@ A strange humming noise pervades the air, and you can''t decern it''s source.','
 INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There are piles of junk all
 around you, and it''s hard to find your way.
 ','Wide Path');
-INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
+INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits
+scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
 INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper littered around.
 There are shelves put in different corners of the room holding different types of wines,
 one you spot is worth a 1000 credits.
@@ -158,7 +159,7 @@ INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious 
 He is dressed in a white vest, grey cargo trousers,
 and has a tape rapped around one of his hands.
 You also notice a scar along his neck stopping at his collar bone.
- ','The body of Grabvoi lies here.',0,0,7,100,1);
+ ','The body of Grabvoi lies here.',30,30,7,100,1);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,
@@ -314,7 +315,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,23,100,10,'',77);
+INSERT INTO "user" VALUES(10,'pilot_1',0,30,100,10,'',86);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
