@@ -70,12 +70,14 @@ Nobody lives here now, though.
 ','Archway');
 INSERT INTO "rooms" VALUES(11,'You are in a driod shop.  There are various droids for sale here, but there is
 no sign of the shop keeper.','Droid Shop');
-INSERT INTO "rooms" VALUES(12,'You find yourself in the middle of the cantina.  There is a counter with a barman serving.  There are stools in front of the bar. 
+INSERT INTO "rooms" VALUES(12,'You find yourself in the middle of the cantina. 
+There is a counter with a barman serving. There are stools in front of the bar. 
 There is a group of tables to the left, where people are playing some kind of card game.
 
 To the right of you is a large vision screen, showing what appears to be a race in progress.
 
-You notice the air is full of a light mist, which seams to be coming from the glasses in peoples hands!
+You notice the air is full of a light mist,
+which seams to be coming from the glasses in peoples hands!
 
 A notice says "Try our new Delmarbeer for the ultimate high!"','Cantina Albar');
 INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are buzy playing a
@@ -100,9 +102,11 @@ INSERT INTO "rooms" VALUES(23,'A large medical center building stands in front o
 double door which opens onto a reception area.','Medical Center');
 INSERT INTO "rooms" VALUES(24,'You are outside a small shop.  There is a dirty old sign over the door which reads SHOP MILBRAGED.
 A window displays books, alien bric a brak, and various weapons.','Outside Shop Milbraged');
-INSERT INTO "rooms" VALUES(25,'You walk through the blue automatic door, you see rows and rows of shelves with a selection of tin can foods; bags of rice; super refreshing water; 
-cheap alcohol that could be used as a weapon, foreign galactic ice cream and local alien meat.
-You also see a book which says S.A.F.A (which is the Special Alien Fighting Agency) all alien fighting secrets revealed!  
+INSERT INTO "rooms" VALUES(25,'You walk through the blue automatic door,
+you see rows and rows of shelves with a selection of tin can foods;
+bags of rice; super refreshing water; cheap alcohol,
+foreign galactic ice cream and local alien meat.
+You also see a book which says S.A.F.A all alien fighting secrets revealed!  
 And at the very back is the til.','Shop Milbraged');
 INSERT INTO "rooms" VALUES(26,'You are in a very dark path between piles of junk.  You can dimly see
 the junk towering above you.','Dark Path');
@@ -119,8 +123,9 @@ INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There 
 around you, and it''s hard to find your way.
 ','Wide Path');
 INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
-INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper litterd around.
-There are shelves put in different corners of the room holding different types of wines, one you spot is worth a 1000 credits.
+INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper littered around.
+There are shelves put in different corners of the room holding different types of wines,
+one you spot is worth a 1000 credits.
 But you also see a camera positioned in the corner of the room.','Cantina basement');
 CREATE TABLE "npc" (
 	`npcid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -281,6 +286,7 @@ CREATE TABLE "inventory" (
 	`userid`	INTEGER NOT NULL,
 	`itemid`	INTEGER NOT NULL
 );
+INSERT INTO "inventory" VALUES(30,10,8);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -308,7 +314,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,26,100,10,'',59);
+INSERT INTO "user" VALUES(10,'pilot_1',0,25,100,10,'',71);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -380,7 +386,7 @@ INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',20);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
-INSERT INTO "sqlite_sequence" VALUES('inventory',29);
+INSERT INTO "sqlite_sequence" VALUES('inventory',30);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',10);
 INSERT INTO "sqlite_sequence" VALUES('battle',23);
