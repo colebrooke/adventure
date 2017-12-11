@@ -54,7 +54,7 @@ It''s very dusty and smells of old computers, which you can see several of lying
 A tent is here, which brings back fond memories of days camping.  
 You remember the tent was owned by your Great Great grandfather.
 ','Loft');
-INSERT INTO "rooms" VALUES(7,'You find yourself in the upper city south.  There is a statue of two hands 
+INSERT INTO "rooms" VALUES(7,'You find yourself in the upper city south. There is a statue of two hands 
 floating in the air shaking hands It has a cube underneath it says
 -Statue of Respect.-','Upper City South');
 INSERT INTO "rooms" VALUES(8,'You are on a bridge across part of the city.  People walk back and forth across.
@@ -70,12 +70,14 @@ Nobody lives here now, though.
 ','Archway');
 INSERT INTO "rooms" VALUES(11,'You are in a driod shop.  There are various droids for sale here, but there is
 no sign of the shop keeper.','Droid Shop');
-INSERT INTO "rooms" VALUES(12,'You find yourself in the middle of the cantina.  There is a counter with a barman serving.  There are stools in front of the bar. 
+INSERT INTO "rooms" VALUES(12,'You find yourself in the middle of the cantina. 
+There is a counter with a barman serving. There are stools in front of the bar. 
 There is a group of tables to the left, where people are playing some kind of card game.
 
 To the right of you is a large vision screen, showing what appears to be a race in progress.
 
-You notice the air is full of a light mist, which seams to be coming from the glasses in peoples hands!
+You notice the air is full of a light mist,
+which seams to be coming from the glasses in peoples hands!
 
 A notice says "Try our new Delmarbeer for the ultimate high!"','Cantina Albar');
 INSERT INTO "rooms" VALUES(14,'You are a dim cantina side room. To the left a couple of men are buzy playing a
@@ -100,9 +102,11 @@ INSERT INTO "rooms" VALUES(23,'A large medical center building stands in front o
 double door which opens onto a reception area.','Medical Center');
 INSERT INTO "rooms" VALUES(24,'You are outside a small shop.  There is a dirty old sign over the door which reads SHOP MILBRAGED.
 A window displays books, alien bric a brak, and various weapons.','Outside Shop Milbraged');
-INSERT INTO "rooms" VALUES(25,'You walk through the blue automatic door, you see rows and rows of shelves with a selection of tin can foods; bags of rice; super refreshing water; 
-cheap alcohol that could be used as a weapon, foreign galactic ice cream and local alien meat.
-You also see a book which says S.A.F.A (which is the Special Alien Fighting Agency) all alien fighting secrets revealed!  
+INSERT INTO "rooms" VALUES(25,'You walk through the blue automatic door,
+you see rows and rows of shelves with a selection of tin can foods;
+bags of rice; super refreshing water; cheap alcohol,
+foreign galactic ice cream and local alien meat.
+You also see a book which says S.A.F.A all alien fighting secrets revealed!  
 And at the very back is the til.','Shop Milbraged');
 INSERT INTO "rooms" VALUES(26,'You are in a very dark path between piles of junk.  You can dimly see
 the junk towering above you.','Dark Path');
@@ -118,9 +122,11 @@ A strange humming noise pervades the air, and you can''t decern it''s source.','
 INSERT INTO "rooms" VALUES(29,'You''re on a path through the lower city.  There are piles of junk all
 around you, and it''s hard to find your way.
 ','Wide Path');
-INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
-INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper litterd around.
-There are shelves put in different corners of the room holding different types of wines, one you spot is worth a 1000 credits.
+INSERT INTO "rooms" VALUES(30,'You walk into the room and see droid repair kits
+scattered across the floor with different droid parts. The room is very cramped and small.','Droid repair room');
+INSERT INTO "rooms" VALUES(31,'You find yourself in a damp basement with bits of ripped up paper littered around.
+There are shelves put in different corners of the room holding different types of wines,
+one you spot is worth a 1000 credits.
 But you also see a camera positioned in the corner of the room.','Cantina basement');
 CREATE TABLE "npc" (
 	`npcid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -139,21 +145,21 @@ He doesn''t look like he''s in the mood for a chat,
 but you can''t help thinking with the right motivation he would
 have a few interesting stories to tell.
 ','The body of an old man lies here.',4,4,5,100,1);
-INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is a ugly look utalitarian device, with various
-arms sticking out.  It looks pretty dangerous in the wrong hands,
+INSERT INTO "npc" VALUES(2,'Repair Droid','You can see a repair droid here.','The repair droid is an ugly looking utalitarian device, with various
+arms sticking out. It looks pretty dangerous in the wrong hands,
 or with the wrong programming....','The remains of a repair droid are here.',7,7,7,100,1);
 INSERT INTO "npc" VALUES(3,'Battle Droid','A battle droid is here.','The battle droid is tall an ungainly.  It looks very old, and is scored with
 black marks, which you presume are scars from laser blasts.
 It''s one green eye glows in it''s round head, giving you no clue of what
 the machine might be thinking.
-','The remains of a battle droid are here.',20,20,9,126,1);
+','The remains of a battle droid are here.',20,20,9,100,1);
 INSERT INTO "npc" VALUES(4,'Shop Keeper','The shop keeper is here.','The shop keeper is a tall slim man wearing overalls. He has a horseshoe mustache
 and long blond hair. In his ear you can see a stange ear peice which is glowing red.','The body of a shop keeper is here',25,25,8,100,1);
 INSERT INTO "npc" VALUES(5,'Grabvoi','A mysterious man is here','The mysterious man is in his mid fifties and has grey curly hair drooping down to his eyebrows.
 He is dressed in a white vest, grey cargo trousers,
 and has a tape rapped around one of his hands.
 You also notice a scar along his neck stopping at his collar bone.
- ','The body of Grabvoi lies here.',0,0,7,100,1);
+ ','The body of Grabvoi lies here.',30,30,7,100,1);
 CREATE TABLE "item" (
 	`itemid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`itemname`	TEXT NOT NULL,
@@ -178,8 +184,9 @@ though there is still one lone trophy which stands still in the middle of the ca
 INSERT INTO "item" VALUES(6,'workbench','There isn''t much remarkable about the workbench.',1,3,3,'A workbench is along one wall.',1);
 INSERT INTO "item" VALUES(7,'laser cutter','The laser cutter looks like it would make a good weapon in the right hands.',1,0,0,'A laser cutter is here.',0);
 INSERT INTO "item" VALUES(8,'blaster pistol','The pistol looks very dangerous and new. You turn the pistol over and see the letters ''BCA'',
-it seems to be some sort of custom pistol, made by only the best weapon maker in the galaxy, Lowo Gora.
-',1,1,7,'There is a blaster pistol here.',0);
+it seems to be some sort of custom pistol,
+made by only the best weapon maker in the galaxy, Lowo Gora.
+',1,26,26,'There is a blaster pistol here.',0);
 INSERT INTO "item" VALUES(9,'bed','The bed is plain and unremarkable.  It doesn''t look very comfortable.',1,1,1,'There is a bed in the corner of the room.',1);
 INSERT INTO "item" VALUES(10,'notice board','There is a single notice on the board. 
 It says ''Come to the droid shop for the best deals
@@ -255,7 +262,7 @@ INSERT INTO "route" VALUES(27,21,20,'e','The door of the elevator is to the east
 INSERT INTO "route" VALUES(28,4,2,'e','In the east there is a courtyard.');
 INSERT INTO "route" VALUES(29,2,4,'w','To the west, you can see the remains of a crashed escape pod.');
 INSERT INTO "route" VALUES(30,7,8,'e','In the east you can see a bridge.');
-INSERT INTO "route" VALUES(31,23,21,'s','To the south, there is the elevator back to the upper city.');
+INSERT INTO "route" VALUES(31,23,21,'s','To the south, there is the lower city elevator.');
 INSERT INTO "route" VALUES(32,9,24,'n','To the north, you can see what looks to be a shop of some kind.');
 INSERT INTO "route" VALUES(33,24,9,'s','A cantina is located to the south of you.');
 INSERT INTO "route" VALUES(34,24,25,'n','The door of the shop is north of you.');
@@ -280,22 +287,7 @@ CREATE TABLE "inventory" (
 	`userid`	INTEGER NOT NULL,
 	`itemid`	INTEGER NOT NULL
 );
-INSERT INTO "inventory" VALUES(7,2,2);
-INSERT INTO "inventory" VALUES(9,4,3);
-INSERT INTO "inventory" VALUES(12,2,1);
-INSERT INTO "inventory" VALUES(13,2,3);
-INSERT INTO "inventory" VALUES(16,1,3);
-INSERT INTO "inventory" VALUES(18,1,8);
-INSERT INTO "inventory" VALUES(20,2,8);
-INSERT INTO "inventory" VALUES(21,8,1);
-INSERT INTO "inventory" VALUES(22,9,1);
-INSERT INTO "inventory" VALUES(23,9,3);
-INSERT INTO "inventory" VALUES(24,9,4);
-INSERT INTO "inventory" VALUES(25,9,8);
-INSERT INTO "inventory" VALUES(26,10,1);
-INSERT INTO "inventory" VALUES(27,10,3);
-INSERT INTO "inventory" VALUES(28,10,8);
-INSERT INTO "inventory" VALUES(29,10,2);
+INSERT INTO "inventory" VALUES(30,10,8);
 CREATE TABLE `npc_inventory` (
 	`inventid`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	`npcid`	INTEGER NOT NULL,
@@ -323,7 +315,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,1,100,10,'',52);
+INSERT INTO "user" VALUES(10,'pilot_1',0,30,100,10,'',86);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
@@ -395,7 +387,7 @@ INSERT INTO "sqlite_sequence" VALUES('npc',5);
 INSERT INTO "sqlite_sequence" VALUES('item',20);
 INSERT INTO "sqlite_sequence" VALUES('object',4);
 INSERT INTO "sqlite_sequence" VALUES('route',52);
-INSERT INTO "sqlite_sequence" VALUES('inventory',29);
+INSERT INTO "sqlite_sequence" VALUES('inventory',30);
 INSERT INTO "sqlite_sequence" VALUES('npc_inventory',5);
 INSERT INTO "sqlite_sequence" VALUES('user',10);
 INSERT INTO "sqlite_sequence" VALUES('battle',23);

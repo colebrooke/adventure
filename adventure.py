@@ -628,7 +628,7 @@ def reset_game ():
 	db('update item set currentroom = defaultroom')	
 
 	# reset user inventory
-	db('delete from inventory where userid = %s' % userid )
+	db('delete from inventory')
 
 
 def look ():
@@ -673,7 +673,7 @@ while True:
 	
 	elif selection == '3':
 		reset_game()
-		print ("The game has been reset, along with your user.")
+		print ("The game has been reset!")
 	elif selection == '4': 
 		print ("Thanks for playing!")
 		print ("")
