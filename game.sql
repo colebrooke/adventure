@@ -261,7 +261,7 @@ INSERT INTO "route" VALUES(27,21,20,'e','The door of the elevator is to the east
 INSERT INTO "route" VALUES(28,4,2,'e','In the east there is a courtyard.');
 INSERT INTO "route" VALUES(29,2,4,'w','To the west, you can see the remains of a crashed escape pod.');
 INSERT INTO "route" VALUES(30,7,8,'e','In the east you can see a bridge.');
-INSERT INTO "route" VALUES(31,23,21,'s','To the south, there is the elevator back to the upper city.');
+INSERT INTO "route" VALUES(31,23,21,'s','To the south, there is the lower city elevator.');
 INSERT INTO "route" VALUES(32,9,24,'n','To the north, you can see what looks to be a shop of some kind.');
 INSERT INTO "route" VALUES(33,24,9,'s','A cantina is located to the south of you.');
 INSERT INTO "route" VALUES(34,24,25,'n','The door of the shop is north of you.');
@@ -314,7 +314,7 @@ INSERT INTO "user" VALUES(4,'Amy',0,1,100,10,'A tall teenager',8);
 INSERT INTO "user" VALUES(5,'Testing',0,1,100,10,'',2);
 INSERT INTO "user" VALUES(7,'Richard',0,1,100,10,'',35);
 INSERT INTO "user" VALUES(9,'user_11',0,1,100,10,'',13);
-INSERT INTO "user" VALUES(10,'pilot_1',0,25,100,10,'',71);
+INSERT INTO "user" VALUES(10,'pilot_1',0,23,100,10,'',77);
 CREATE TABLE "weapon" (
 	`weaponid`	INTEGER NOT NULL,
 	`power`	INTEGER NOT NULL,
