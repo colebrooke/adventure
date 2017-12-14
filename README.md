@@ -29,6 +29,11 @@ On OSX / Linux, at the command line, run the following commands:-
 The setup.sh bash script is to create the .db binary from the game.sql file.
 
 
+Note about commiting
+--------------------
+Run the `pre-commit-db-changes.sh` script prior to commiting, if you've made changes to the database.  This will save the entire sqlite database as a text file, which works much better with source control. 
+
+
 Contributors
 ------------
 - [Jensen Miller](http://github.com/colebrooke101)
