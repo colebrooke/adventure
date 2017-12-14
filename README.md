@@ -6,6 +6,8 @@ The database back end is created in SQLite3.
 
 The game is still under development, there are plenty of non-working features!
 
+![Preview](ing/screenie2.png)
+
 Any help is appreciated :)
 
 Dependancies
