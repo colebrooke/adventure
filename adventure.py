@@ -365,7 +365,7 @@ def open ():
 
 		time.sleep(0.3)
 		print ("You open the cabinet.")
-		db("update item set open = 1 where itemname = 'trohpy cabinet'")
+		db("update item set open = 1 where itemid = 5")
 		db("update item set currentroom = 1 where itemname = 'trophy'")
 		time.sleep(0.3)
 		print ("You see a trophy here.")
