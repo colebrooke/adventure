@@ -453,8 +453,7 @@ def talk ():
 def sleep ():
 #---------------------------------------------------------------------
 	current_room = db("select location from user where userid=%s" % ( userid ) )
-
-	if current_room == 1:
+	if current_room == "1":
 		print ("You go to sleep for a while on the bed.")
 	else:
 		print ("You manage to sleep for a few minutes on the hard floor.")
