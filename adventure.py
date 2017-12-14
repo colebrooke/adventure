@@ -356,6 +356,24 @@ def drop ():
 		print ("You can't do that!")
 
 
+def open ():
+#--------------------------------------------------------	
+	current_room = db("select location from user where userid=%s" % ( userid ))
+	if current_room == "1":
+		# you must be in the appartment, so you must be opening the trophy cabinet
+		# TODO: do you have the key?
+
+		time.sleep(0.3)
+		print ("You open the cabinet.")
+		db("update item set open = 1 where itemname = 'trohpy cabinet'")
+		db("update item set currentroom = 1 where itemname = 'trophy'")
+		time.sleep(0.3)
+		print ("You see a trophy here.")
+		time.sleep(0.5)
+		print_current_room ( userid )
+
+
+
 
 def help ():
 #--------------------------------------------------------
@@ -757,6 +775,8 @@ while loop == 1 :
 		re.match (r'^kill', userinput ) or \
 		re.match (r'^hit', userinput ) or \
 		re.match (r'^shoot', userinput ):	attack ()
+	# Open
+	elif 	re.match (r'^open', userinput ): open ()
 
 	# Exit
 	elif (userinput == "exit") or (userinput == "quit"):
